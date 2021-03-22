@@ -1,0 +1,203 @@
+21:21:38 **** Incremental Build of configuration release for project Multilayer-satellites ****
+make MODE=release all 
+ChannelController.cc
+Clock.cc
+fallback.cc
+GroundNodeMobility.cc
+HAPMobility.cc
+OsgEarthScene.cc
+SatMobility.cc
+terNetMobility.cc
+Creating executable: out/gcc-release//Multilayer-satellites
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `__factoryfunc_41()':
+GroundNodeMobility.cc:(.text+0x24d): undefined reference to `inet::MobilityBase::MobilityBase()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::getCurrentAngularVelocity()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility25getCurrentAngularVelocityEv[_ZN18GroundNodeMobility25getCurrentAngularVelocityEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::getCurrentAngularVelocity()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility25getCurrentAngularVelocityEv[_ZN18GroundNodeMobility25getCurrentAngularVelocityEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::getCurrentAngularAcceleration()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility29getCurrentAngularAccelerationEv[_ZN18GroundNodeMobility29getCurrentAngularAccelerationEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::getCurrentAngularAcceleration()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility29getCurrentAngularAccelerationEv[_ZN18GroundNodeMobility29getCurrentAngularAccelerationEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::getCurrentVelocity()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility18getCurrentVelocityEv[_ZN18GroundNodeMobility18getCurrentVelocityEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::getCurrentVelocity()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility18getCurrentVelocityEv[_ZN18GroundNodeMobility18getCurrentVelocityEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::getCurrentAcceleration()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility22getCurrentAccelerationEv[_ZN18GroundNodeMobility22getCurrentAccelerationEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::getCurrentAcceleration()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobility22getCurrentAccelerationEv[_ZN18GroundNodeMobility22getCurrentAccelerationEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::~GroundNodeMobility()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobilityD2Ev[_ZN18GroundNodeMobilityD5Ev]+0xae): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::~GroundNodeMobility()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobilityD2Ev[_ZN18GroundNodeMobilityD5Ev]+0x1b3): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `non-virtual thunk to GroundNodeMobility::~GroundNodeMobility()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobilityD0Ev[_ZN18GroundNodeMobilityD5Ev]+0xaa): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `GroundNodeMobility::~GroundNodeMobility()':
+GroundNodeMobility.cc:(.text._ZN18GroundNodeMobilityD0Ev[_ZN18GroundNodeMobilityD5Ev]+0x1be): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o: in function `inet::OsgGeographicCoordinateSystem* inet::getModuleFromPar<inet::OsgGeographicCoordinateSystem>(omnetpp::cPar&, omnetpp::cModule const*, bool)':
+GroundNodeMobility.cc:(.text._ZN4inet16getModuleFromParINS_29OsgGeographicCoordinateSystemEEEPT_RN7omnetpp4cParEPKNS4_7cModuleEb[_ZN4inet16getModuleFromParINS_29OsgGeographicCoordinateSystemEEEPT_RN7omnetpp4cParEPKNS4_7cModuleEb]+0x49): undefined reference to `typeinfo for inet::OsgGeographicCoordinateSystem'
+/usr/bin/ld: GroundNodeMobility.cc:(.text._ZN4inet16getModuleFromParINS_29OsgGeographicCoordinateSystemEEEPT_RN7omnetpp4cParEPKNS4_7cModuleEb[_ZN4inet16getModuleFromParINS_29OsgGeographicCoordinateSystemEEEPT_RN7omnetpp4cParEPKNS4_7cModuleEb]+0x10a): undefined reference to `typeinfo for inet::OsgGeographicCoordinateSystem'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTI18GroundNodeMobility[_ZTI18GroundNodeMobility]+0x10): undefined reference to `typeinfo for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x138): undefined reference to `inet::MobilityBase::handleParameterChange(char const*)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x140): undefined reference to `inet::MobilityBase::refreshDisplay() const'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x4d8): undefined reference to `inet::MobilityBase::handleMessage(omnetpp::cMessage*)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5b0): undefined reference to `inet::MobilityBase::initializePosition()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5b8): undefined reference to `inet::MobilityBase::setInitialPosition()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5c0): undefined reference to `inet::MobilityBase::checkPosition()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5c8): undefined reference to `inet::MobilityBase::initializeOrientation()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5d0): undefined reference to `inet::MobilityBase::updateDisplayStringFromMobilityState() const'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5e0): undefined reference to `inet::MobilityBase::emitMobilityStateChangedSignal()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5e8): undefined reference to `inet::MobilityBase::getRandomPosition()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x5f8): undefined reference to `inet::MobilityBase::isOutside()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x600): undefined reference to `inet::MobilityBase::reflectIfOutside(inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x608): undefined reference to `inet::MobilityBase::wrapIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x610): undefined reference to `inet::MobilityBase::placeRandomlyIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x618): undefined reference to `inet::MobilityBase::raiseErrorIfOutside()'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x620): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x628): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x630): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//GroundNodeMobility.o:(.data.rel.ro._ZTV18GroundNodeMobility[_ZTV18GroundNodeMobility]+0x638): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `__factoryfunc_41()':
+HAPMobility.cc:(.text+0x24d): undefined reference to `inet::MobilityBase::MobilityBase()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::getCurrentAngularVelocity()':
+HAPMobility.cc:(.text._ZN11HAPMobility25getCurrentAngularVelocityEv[_ZN11HAPMobility25getCurrentAngularVelocityEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::getCurrentAngularVelocity()':
+HAPMobility.cc:(.text._ZN11HAPMobility25getCurrentAngularVelocityEv[_ZN11HAPMobility25getCurrentAngularVelocityEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::getCurrentAngularAcceleration()':
+HAPMobility.cc:(.text._ZN11HAPMobility29getCurrentAngularAccelerationEv[_ZN11HAPMobility29getCurrentAngularAccelerationEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::getCurrentAngularAcceleration()':
+HAPMobility.cc:(.text._ZN11HAPMobility29getCurrentAngularAccelerationEv[_ZN11HAPMobility29getCurrentAngularAccelerationEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::getCurrentVelocity()':
+HAPMobility.cc:(.text._ZN11HAPMobility18getCurrentVelocityEv[_ZN11HAPMobility18getCurrentVelocityEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::getCurrentVelocity()':
+HAPMobility.cc:(.text._ZN11HAPMobility18getCurrentVelocityEv[_ZN11HAPMobility18getCurrentVelocityEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::getCurrentAcceleration()':
+HAPMobility.cc:(.text._ZN11HAPMobility22getCurrentAccelerationEv[_ZN11HAPMobility22getCurrentAccelerationEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::getCurrentAcceleration()':
+HAPMobility.cc:(.text._ZN11HAPMobility22getCurrentAccelerationEv[_ZN11HAPMobility22getCurrentAccelerationEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::~HAPMobility()':
+HAPMobility.cc:(.text._ZN11HAPMobilityD2Ev[_ZN11HAPMobilityD5Ev]+0xae): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::~HAPMobility()':
+HAPMobility.cc:(.text._ZN11HAPMobilityD2Ev[_ZN11HAPMobilityD5Ev]+0x1b3): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `non-virtual thunk to HAPMobility::~HAPMobility()':
+HAPMobility.cc:(.text._ZN11HAPMobilityD0Ev[_ZN11HAPMobilityD5Ev]+0xaa): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//HAPMobility.o: in function `HAPMobility::~HAPMobility()':
+HAPMobility.cc:(.text._ZN11HAPMobilityD0Ev[_ZN11HAPMobilityD5Ev]+0x1be): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTI11HAPMobility[_ZTI11HAPMobility]+0x10): undefined reference to `typeinfo for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x138): undefined reference to `inet::MobilityBase::handleParameterChange(char const*)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x140): undefined reference to `inet::MobilityBase::refreshDisplay() const'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x4d8): undefined reference to `inet::MobilityBase::handleMessage(omnetpp::cMessage*)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5b0): undefined reference to `inet::MobilityBase::initializePosition()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5b8): undefined reference to `inet::MobilityBase::setInitialPosition()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5c0): undefined reference to `inet::MobilityBase::checkPosition()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5c8): undefined reference to `inet::MobilityBase::initializeOrientation()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5d0): undefined reference to `inet::MobilityBase::updateDisplayStringFromMobilityState() const'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5e0): undefined reference to `inet::MobilityBase::emitMobilityStateChangedSignal()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5e8): undefined reference to `inet::MobilityBase::getRandomPosition()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x5f8): undefined reference to `inet::MobilityBase::isOutside()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x600): undefined reference to `inet::MobilityBase::reflectIfOutside(inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x608): undefined reference to `inet::MobilityBase::wrapIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x610): undefined reference to `inet::MobilityBase::placeRandomlyIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x618): undefined reference to `inet::MobilityBase::raiseErrorIfOutside()'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x620): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x628): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x630): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//HAPMobility.o:(.data.rel.ro._ZTV11HAPMobility[_ZTV11HAPMobility]+0x638): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `__factoryfunc_45()':
+SatMobility.cc:(.text+0x174): undefined reference to `inet::MobilityBase::MobilityBase()'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::recorder(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)':
+SatMobility.cc:(.text+0xa7c): undefined reference to `inet::getContainingNode(omnetpp::cModule const*)'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::getCurrentAngularVelocity()':
+SatMobility.cc:(.text._ZN11SatMobility25getCurrentAngularVelocityEv[_ZN11SatMobility25getCurrentAngularVelocityEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::getCurrentAngularVelocity()':
+SatMobility.cc:(.text._ZN11SatMobility25getCurrentAngularVelocityEv[_ZN11SatMobility25getCurrentAngularVelocityEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::getCurrentAngularAcceleration()':
+SatMobility.cc:(.text._ZN11SatMobility29getCurrentAngularAccelerationEv[_ZN11SatMobility29getCurrentAngularAccelerationEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::getCurrentAngularAcceleration()':
+SatMobility.cc:(.text._ZN11SatMobility29getCurrentAngularAccelerationEv[_ZN11SatMobility29getCurrentAngularAccelerationEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::getCurrentVelocity()':
+SatMobility.cc:(.text._ZN11SatMobility18getCurrentVelocityEv[_ZN11SatMobility18getCurrentVelocityEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::getCurrentVelocity()':
+SatMobility.cc:(.text._ZN11SatMobility18getCurrentVelocityEv[_ZN11SatMobility18getCurrentVelocityEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::getCurrentAcceleration()':
+SatMobility.cc:(.text._ZN11SatMobility22getCurrentAccelerationEv[_ZN11SatMobility22getCurrentAccelerationEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::getCurrentAcceleration()':
+SatMobility.cc:(.text._ZN11SatMobility22getCurrentAccelerationEv[_ZN11SatMobility22getCurrentAccelerationEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `__factoryfunc_45() [clone .cold]':
+SatMobility.cc:(.text.unlikely+0x49): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::~SatMobility()':
+SatMobility.cc:(.text._ZN11SatMobilityD0Ev[_ZN11SatMobilityD5Ev]+0x76): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::~SatMobility()':
+SatMobility.cc:(.text._ZN11SatMobilityD0Ev[_ZN11SatMobilityD5Ev]+0x15a): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `non-virtual thunk to SatMobility::~SatMobility()':
+SatMobility.cc:(.text._ZN11SatMobilityD2Ev[_ZN11SatMobilityD5Ev]+0x73): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o: in function `SatMobility::~SatMobility()':
+SatMobility.cc:(.text._ZN11SatMobilityD2Ev[_ZN11SatMobilityD5Ev]+0x15a): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTI11SatMobility[_ZTI11SatMobility]+0x10): undefined reference to `typeinfo for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x138): undefined reference to `inet::MobilityBase::handleParameterChange(char const*)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5b0): undefined reference to `inet::MobilityBase::initializePosition()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5b8): undefined reference to `inet::MobilityBase::setInitialPosition()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5c0): undefined reference to `inet::MobilityBase::checkPosition()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5c8): undefined reference to `inet::MobilityBase::initializeOrientation()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5d0): undefined reference to `inet::MobilityBase::updateDisplayStringFromMobilityState() const'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5e0): undefined reference to `inet::MobilityBase::emitMobilityStateChangedSignal()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5e8): undefined reference to `inet::MobilityBase::getRandomPosition()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x5f8): undefined reference to `inet::MobilityBase::isOutside()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x600): undefined reference to `inet::MobilityBase::reflectIfOutside(inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x608): undefined reference to `inet::MobilityBase::wrapIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x610): undefined reference to `inet::MobilityBase::placeRandomlyIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x618): undefined reference to `inet::MobilityBase::raiseErrorIfOutside()'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x620): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x628): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x630): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//SatMobility.o:(.data.rel.ro._ZTV11SatMobility[_ZTV11SatMobility]+0x638): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `__factoryfunc_41()':
+terNetMobility.cc:(.text+0x24d): undefined reference to `inet::MobilityBase::MobilityBase()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::getCurrentAngularVelocity()':
+terNetMobility.cc:(.text._ZN14terNetMobility25getCurrentAngularVelocityEv[_ZN14terNetMobility25getCurrentAngularVelocityEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::getCurrentAngularVelocity()':
+terNetMobility.cc:(.text._ZN14terNetMobility25getCurrentAngularVelocityEv[_ZN14terNetMobility25getCurrentAngularVelocityEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::getCurrentAngularAcceleration()':
+terNetMobility.cc:(.text._ZN14terNetMobility29getCurrentAngularAccelerationEv[_ZN14terNetMobility29getCurrentAngularAccelerationEv]+0x7): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::getCurrentAngularAcceleration()':
+terNetMobility.cc:(.text._ZN14terNetMobility29getCurrentAngularAccelerationEv[_ZN14terNetMobility29getCurrentAngularAccelerationEv]+0x47): undefined reference to `inet::Quaternion::IDENTITY'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::getCurrentVelocity()':
+terNetMobility.cc:(.text._ZN14terNetMobility18getCurrentVelocityEv[_ZN14terNetMobility18getCurrentVelocityEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::getCurrentVelocity()':
+terNetMobility.cc:(.text._ZN14terNetMobility18getCurrentVelocityEv[_ZN14terNetMobility18getCurrentVelocityEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::getCurrentAcceleration()':
+terNetMobility.cc:(.text._ZN14terNetMobility22getCurrentAccelerationEv[_ZN14terNetMobility22getCurrentAccelerationEv]+0x7): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::getCurrentAcceleration()':
+terNetMobility.cc:(.text._ZN14terNetMobility22getCurrentAccelerationEv[_ZN14terNetMobility22getCurrentAccelerationEv]+0x27): undefined reference to `inet::Coord::ZERO'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::~terNetMobility()':
+terNetMobility.cc:(.text._ZN14terNetMobilityD2Ev[_ZN14terNetMobilityD5Ev]+0xae): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::~terNetMobility()':
+terNetMobility.cc:(.text._ZN14terNetMobilityD2Ev[_ZN14terNetMobilityD5Ev]+0x1b3): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `non-virtual thunk to terNetMobility::~terNetMobility()':
+terNetMobility.cc:(.text._ZN14terNetMobilityD0Ev[_ZN14terNetMobilityD5Ev]+0xaa): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//terNetMobility.o: in function `terNetMobility::~terNetMobility()':
+terNetMobility.cc:(.text._ZN14terNetMobilityD0Ev[_ZN14terNetMobilityD5Ev]+0x1be): undefined reference to `vtable for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTI14terNetMobility[_ZTI14terNetMobility]+0x10): undefined reference to `typeinfo for inet::MobilityBase'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x138): undefined reference to `inet::MobilityBase::handleParameterChange(char const*)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x140): undefined reference to `inet::MobilityBase::refreshDisplay() const'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x4d8): undefined reference to `inet::MobilityBase::handleMessage(omnetpp::cMessage*)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5b0): undefined reference to `inet::MobilityBase::initializePosition()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5b8): undefined reference to `inet::MobilityBase::setInitialPosition()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5c0): undefined reference to `inet::MobilityBase::checkPosition()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5c8): undefined reference to `inet::MobilityBase::initializeOrientation()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5d0): undefined reference to `inet::MobilityBase::updateDisplayStringFromMobilityState() const'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5e0): undefined reference to `inet::MobilityBase::emitMobilityStateChangedSignal()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5e8): undefined reference to `inet::MobilityBase::getRandomPosition()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x5f8): undefined reference to `inet::MobilityBase::isOutside()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x600): undefined reference to `inet::MobilityBase::reflectIfOutside(inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x608): undefined reference to `inet::MobilityBase::wrapIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x610): undefined reference to `inet::MobilityBase::placeRandomlyIfOutside(inet::Coord&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x618): undefined reference to `inet::MobilityBase::raiseErrorIfOutside()'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x620): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x628): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x630): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&)'
+/usr/bin/ld: out/gcc-release//terNetMobility.o:(.data.rel.ro._ZTV14terNetMobility[_ZTV14terNetMobility]+0x638): undefined reference to `inet::MobilityBase::handleIfOutside(inet::MobilityBase::BorderPolicy, inet::Coord&, inet::Coord&, inet::units::value<double, inet::units::units::rad>&, inet::units::value<double, inet::units::units::rad>&, inet::Quaternion&)'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:112：out/gcc-release//Multilayer-satellites] 错误 1
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.

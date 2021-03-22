@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<LIPSINConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="OSPF.xsd">
+
+
+  <!-- Routers -->
+  <Router name="R1">
+    <PhysicalLink ifName="ppp0" srcId="1" destId="4" cost="2" linkId="1"/>
+    <PhysicalLink ifName="ppp1" srcId="1" destId="2" cost="2" linkId="2"/>
+    <VirtualLink ifName="ppp1" srcId="1" destId="4" cost="2" linkId="1"/>
+  </Router>
+
+  <Router name="R2">
+    <PhysicalLink ifName="ppp0" srcId="2" destId="1" cost="2" linkId="6"/>
+    <PhysicalLink ifName="ppp1" srcId="2" destId="3" cost="2" linkId="3"/>
+    <VirtualLink ifName="ppp1" srcId="4" destId="1" cost="2" linkId="5"/>
+    <VirtualLink ifName="ppp0" srcId="1" destId="4" cost="2" linkId="1"/>
+  </Router>
+  
+  <Router name="R3">
+    <PhysicalLink ifName="ppp0" srcId="3" destId="2" cost="2" linkId="7"/>
+    <PhysicalLink ifName="ppp1" srcId="3" destId="4" cost="2" linkId="4"/>
+    <VirtualLink ifName="ppp0" srcId="4" destId="1" cost="2" linkId="5"/>
+    <VirtualLink ifName="ppp1" srcId="1" destId="4" cost="2" linkId="1"/>
+  </Router>
+
+  <Router name="R4">
+    <PhysicalLink ifName="ppp0" srcId="4" destId="1" cost="2" linkId="5"/>
+    <PhysicalLink ifName="ppp1" srcId="4" destId="3" cost="2" linkId="8"/>
+    <VirtualLink ifName="ppp1" srcId="4" destId="1" cost="2" linkId="5"/>
+  </Router>
+
+</LIPSINConfig>

@@ -1,0 +1,38 @@
+file 1404 1616394327                                            
+version 2
+run CheckTheLinkChange-0-20210322-14:25:23-132755
+attr configname CheckTheLinkChange
+attr datetime 20210322-14:25:23
+attr experiment CheckTheLinkChange
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network SimpleTest
+attr processid 132755
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.scenarioManager.script "xml( \t\t\"<script>\\n:\" + \t\t\"<at t='55s'><disconnect src-module='R2' src-gate='pppg[0]' /></at>\\n\" + \t\t\"<at t='57s'><connect src-module='R4' src-gate='pppg[0]' dest-module='R2' dest-gate='pppg[0]' channel-type='inet.examples.ospfv2.simpletest.SimpleTest.C'/></at>\\n\" + \t\t\"</script>\")"
+param **.ospf.ospfConfig "xmldoc(\"ASConfig.xml\")"
+param **.lipsinConfig "xmldoc(\"lipsinConfig.xml\")"
+param **.R4.trafGen.startTime 4s
+param **.R4.trafGen.stopTime 10s
+param **.R4.trafGen.destAddresses "\"192.168.0.1\""
+param **.R4.trafGen.protocol 144
+param **.R4.trafGen.packetLength "1200 bytes"
+param **.arp.cacheTimeout 1s
+
+vector 0 SimpleTest.R2.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "tx state, vector"
+vector 1 SimpleTest.R4.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "tx state, vector"
+0	1387 8 0 0 0 0 1 0 0 0 0
+1	1395 8 0 0 0 0 1 0 0 0 0
+

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<LIPSINConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="OSPF.xsd">
+
+
+  <!-- Routers -->
+  <Router name="R2">
+    <PhysicalLink ifName="eth0" srcId="2" destId="3" cost="2" linkId="40"/>
+    <PhysicalLink ifName="ppp0" srcId="2" destId="4" cost="2" linkId="45"/>
+  </Router>
+
+  <Router name="R4">
+    <PhysicalLink ifName="eth0" srcId="4" destId="2" cost="2" linkId="47"/>
+    <PhysicalLink ifName="ppp0" srcId="4" destId="3" cost="2" linkId="49"/>
+  </Router>
+
+</LIPSINConfig>
