@@ -3,6 +3,7 @@ package inet.examples.lipsintest;
 
 import inet.common.misc.ThruputMeteringChannel;
 import inet.common.scenario.ScenarioManager;
+import inet.common.scenario.SatScenarioManager;
 import inet.linklayer.ethernet.EtherHub;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 import inet.node.inet.StandardHost;
@@ -70,7 +71,7 @@ network SimpleTest
                 addDefaultRoutes = false;
                 @display("p=100,100;is=s");
         }
-        scenarioManager: ScenarioManager {
+        scenarioManager: SatScenarioManager {
             @display("p=100,200;is=s");
         }
 
