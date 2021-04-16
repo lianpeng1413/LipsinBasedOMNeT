@@ -17,6 +17,8 @@
 //
 
 #include "inet/applications/generic/IpvxTrafGen.h"
+#include "inet/applications/generic/LipsinRoute/LipsinRouteConfigurator.h"
+#include "inet/applications/generic/LipsinRoute/LipsinTopoManager.h"
 
 #include "inet/common/IProtocolRegistrationListener.h"
 #include "inet/common/ModuleAccess.h"
@@ -63,6 +65,9 @@ IpvxTrafGen::IpvxTrafGen()
 IpvxTrafGen::~IpvxTrafGen()
 {
     cancelAndDelete(timer);
+    cancelAndDelete(topoManager->getUpdateTimer());
+    delete routeInfoTable;
+    delete topoManager;
 }
 
 void IpvxTrafGen::initialize(int stage)
@@ -98,6 +103,19 @@ void IpvxTrafGen::initialize(int stage)
         WATCH(numReceived);
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER) {
+        routeInfoTable = new lipsin::LinkInfoTable(this);
+        lipsin::LipsinRouteConfigurator configurator(getContainingNode(this),routeInfoTable);
+        cXMLElement *lipsinConfig = par("lipsinConfig"),*script = par("script");
+        if (!configurator.loadConfigFromXML(lipsinConfig))
+                    throw cRuntimeError("IpvxTrafGen Error reading LIPSIN configuration from %s", lipsinConfig->getSourceLocation());
+        routeInfoTable->reCalculate(&linkSetById);
+        for(const auto &linkSetMap:linkSetById){
+            std::cout<< "destination "<< linkSetMap.first << std::endl;
+            for(const auto & link:*linkSetMap.second) std::cout<<link<<"\t";
+            std::cout<<std::endl;
+        }
+        topoManager = new lipsin::LipsinTopoManager(routeInfoTable,this,&linkSetById);
+        topoManager->loadConfigFromXML(script);
         registerService(*protocol, nullptr, gate("ipIn"));
         registerProtocol(*protocol, gate("ipOut"), nullptr);
     }
@@ -111,6 +129,7 @@ void IpvxTrafGen::startApp()
 
 void IpvxTrafGen::handleMessageWhenUp(cMessage *msg)
 {
+    std::string msgName(msg->getName()),timeName(topoManager->getUpdateTimer()->getName());
     if (msg == timer) {
         if (msg->getKind() == START) {
             destAddresses.clear();
@@ -131,6 +150,10 @@ void IpvxTrafGen::handleMessageWhenUp(cMessage *msg)
             if (isEnabled())
                 scheduleNextPacket(simTime());
         }
+    }
+    else if(msgName == timeName){
+        delete msg;
+        topoManager->changeTopo();
     }
     else
         processPacket(check_and_cast<Packet *>(msg));
@@ -205,10 +228,18 @@ void IpvxTrafGen::sendPacket()
     send(packet, "ipOut");
     numSent++;
 }
-
+void IpvxTrafGen::preRoute(Packet *packet,int dest){
+    const auto& lipsinHeader = makeShared<LipsinHeader>();
+    std::list<int> *links = linkSetById[dest];
+    for(auto link:*links){
+        lipsinHeader->addLinkToPreRoute(link);
+    }
+    packet->insertAtFront(lipsinHeader);
+}
 void IpvxTrafGen::encapsulateLipsin(Packet *packet)
 {
     const auto& lipsinHeader = makeShared<LipsinHeader>();
+
     lipsinHeader->addLinkToPreRoute(1); // can add pre route link id into BF[0]
     lipsinHeader->addLinkToPreRoute(33); // can add pre route link id into BF[0]
     lipsinHeader->addLinkToPreRoute(74); // can add pre route link id into BF[0]
@@ -220,6 +251,7 @@ void IpvxTrafGen::encapsulateLipsin(Packet *packet)
     lipsinHeader->addLinkToPreRoute(194); // can add pre route link id into BF[0]
     lipsinHeader->addLinkToPreRoute(192); // can add pre route link id into BF[0]
     packet->insertAtFront(lipsinHeader);
+    //preRoute(packet,61);
 }
 void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
 {

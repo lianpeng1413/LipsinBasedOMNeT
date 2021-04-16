@@ -7,7 +7,6 @@
 
 #ifndef INET_NETWORKLAYER_LIPSIN_CONFIGURATOR_LIPSINCONFIGREADER_H_
 #define INET_NETWORKLAYER_LIPSIN_CONFIGURATOR_LIPSINCONFIGREADER_H_
-
 #include "inet/common/INETDefs.h"
 #include "inet/networklayer/contract/IInterfaceTable.h"
 #include "inet/networklayer/lipsin/LipsinLdEntry.h"

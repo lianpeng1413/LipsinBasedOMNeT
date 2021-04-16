@@ -41,6 +41,8 @@ simple IpvxTrafGen like IIpvxTrafficGenerator
         bool hasLipsin = default(false);
         volatile int packetLength @unit(B); // packet length in bytes
         string destAddresses = default(""); // list of destination addresses, separated by spaces
+        xml lipsinConfig = default(xmldoc("lipsinConfig.xml"));
+        xml script = default(xmldoc("script.xml"));
         @lifecycleSupport;
         @display("i=block/source");
         @signal[packetSent](type=inet::Packet);

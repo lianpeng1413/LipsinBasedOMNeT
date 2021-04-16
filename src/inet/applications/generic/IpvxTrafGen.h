@@ -23,6 +23,8 @@
 
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/applications/generic/IpvxTrafSink.h"
+#include "inet/applications/generic/LipsinRoute/LipsinRouteConfigurator.h"
+#include "inet/applications/generic/LipsinRoute/LipsinTopoManager.h"
 #include "inet/common/INETDefs.h"
 #include "inet/common/Protocol.h"
 #include "inet/common/packet/Packet.h"
@@ -47,7 +49,9 @@ class INET_API IpvxTrafGen : public ApplicationBase
     std::vector<L3Address> destAddresses;
     int numPackets = 0;
     bool hasLipsin = false;
-
+    lipsin::LinkInfoTable *routeInfoTable;
+    lipsin::LipsinTopoManager *topoManager;
+    std::map<int,std::list<int>*> linkSetById;
     // state
     cMessage *timer = nullptr;
 
@@ -80,6 +84,7 @@ class INET_API IpvxTrafGen : public ApplicationBase
     virtual void handleStartOperation(LifecycleOperation *operation) override;
     virtual void handleStopOperation(LifecycleOperation *operation) override;
     virtual void handleCrashOperation(LifecycleOperation *operation) override;
+    void preRoute(Packet *packet,int dest);
 
   public:
     IpvxTrafGen();

@@ -20,6 +20,9 @@
 #define __INET_IPVXTRAFSINK_H
 
 #include <vector>
+#include <regex>
+#include <cstring>
+#include <fstream>
 
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/common/INETDefs.h"
@@ -34,8 +37,10 @@ namespace inet {
 class INET_API IpvxTrafSink : public ApplicationBase
 {
   protected:
+    int numTransitted;
     int numReceived;
-
+    int leoId;
+    std::ofstream *outFile;
   protected:
     virtual void printPacket(Packet *msg);
     virtual void processPacket(Packet *msg);
@@ -46,7 +51,7 @@ class INET_API IpvxTrafSink : public ApplicationBase
     virtual void refreshDisplay() const override;
 
     virtual void handleStartOperation(LifecycleOperation *operation) override { }
-    virtual void handleStopOperation(LifecycleOperation *operation) override { }
+    virtual void handleStopOperation(LifecycleOperation *operation) override { outFile->close(); delete outFile; }
     virtual void handleCrashOperation(LifecycleOperation *operation) override { }
 };
 

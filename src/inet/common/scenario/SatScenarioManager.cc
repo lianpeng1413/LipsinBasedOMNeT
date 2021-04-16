@@ -77,7 +77,6 @@ void SatScenarioManager::processAtCommand(const cXMLElement *node)
     simtime_t t = SimTime::parse(tAttr);
     for (cXMLElement *child = node->getFirstChild(); child; child = child->getNextSibling()){
         std::string tag = child->getTagName();
-        std::cout<<tag<<std::endl;
         if(tag == CMD_CONNECT){
             srand(time(0));
             double delayTime = ((double)rand())/(RAND_MAX) * intervals;

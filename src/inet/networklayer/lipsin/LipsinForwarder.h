@@ -117,6 +117,7 @@ class INET_API LipsinForwarder : public OperationalBase, public NetfilterBase, p
              * Invokes encapsulate(), then routePacket().
              */
             virtual void handlePacketFromHL(Packet *packet);
+            virtual void sendPacketToHL(Packet *packet);
 
             /**
              * Decapsulate packet.

@@ -17,6 +17,9 @@
 //
 
 #include "inet/applications/generic/IpvxTrafGen.h"
+#include "inet/applications/generic/IpvxTrafSink.h"
+#include "inet/networklayer/ipv4/Ipv4Header_m.h"
+#include "inet/networklayer/lipsin/LipsinHeader_m.h"
 #include "inet/common/IProtocolRegistrationListener.h"
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/ProtocolGroup.h"
@@ -36,7 +39,9 @@ void IpvxTrafSink::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL) {
         numReceived = 0;
+        numTransitted = 0;
         WATCH(numReceived);
+        WATCH(numTransitted);
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER) {
         int protocolId = par("protocol");
@@ -51,6 +56,14 @@ void IpvxTrafSink::initialize(int stage)
         }
         registerService(*protocol, nullptr, gate("ipIn"));
         registerProtocol(*protocol, gate("ipOut"), nullptr);
+
+        std::string nodeFullPath = this->getFullPath();
+        std::smatch match;
+        std::regex r("([[:w:]]+)\.LEO([0-9]+)\.([[:w:]]+)");
+        bool found = regex_search(nodeFullPath,match,r);
+        leoId = std::stoi(match.str(2));
+        outFile = new std::ofstream("outSink.txt",std::ios::out|std::ios::trunc);
+        if(!outFile->is_open()) throw cRuntimeError("Failed to open the file outSink.txt");
     }
 }
 
@@ -64,7 +77,7 @@ void IpvxTrafSink::refreshDisplay() const
     ApplicationBase::refreshDisplay();
 
     char buf[32];
-    sprintf(buf, "rcvd: %d pks", numReceived);
+    sprintf(buf, "rcvd: %d pks\n transit: %d pks", numReceived,numTransitted);
     getDisplayString().setTagArg("t", 0, buf);
 }
 
@@ -94,10 +107,21 @@ void IpvxTrafSink::printPacket(Packet *msg)
 void IpvxTrafSink::processPacket(Packet *msg)
 {
     emit(packetReceivedSignal, msg);
-    EV_INFO << "Received packet: ";
+    const auto & lipsinHeader = msg->removeAtFront<LipsinHeader>();
+    const auto & ipHeader = msg->removeAtFront<Ipv4Header>();
+    EV_INFO << leoId << " Received packet:";
+    std::string s = (std::string("192.168.0.") + std::to_string(leoId));
+    Ipv4Address addr(s.data());
+    if(ipHeader->getDestAddress() == addr) {
+        (*outFile)<<"Time:"<<simTime()<<"\t"<<numReceived++<<std::endl;
+    }
+
     printPacket(msg);
+
+    msg->trim();
     delete msg;
-    numReceived++;
+    numTransitted++;
+
 }
 
 } // namespace inet

@@ -20,6 +20,7 @@ package inet.node.lipsin;
 import inet.node.inet.Router;
 import inet.applications.generic.IpvxTrafGen;
 import inet.applications.generic.IIpvxTrafficGenerator;
+import inet.applications.generic.IpvxTrafSink;
 //
 // An Lipsin router.
 //
@@ -28,14 +29,23 @@ module LipsinRouter extends Router
     parameters:
         hasLipsin = true;
         bool hasTrafGen = default(false);
+        bool hasTrafSink = default(true);
         *.hasLipsin = hasLipsin;
+        @display("i=device/satellite_vl");
+        @display("bgb=1359.225,669.375");
     submodules:
         trafGen: <default("IpvxTrafGen")> like IIpvxTrafficGenerator if hasTrafGen {
             parameters:
                 @display("p=1125,226");
         }
-   connections allowunconnected:
+        trafSink: <default("IpvxTrafSink")> like IIpvxTrafficGenerator if hasTrafSink {
+            parameters:
+                @display("p=1250,226");
+        }
+    connections allowunconnected:
         trafGen.ipOut --> tn.in++ if hasTrafGen;
         trafGen.ipIn <-- tn.out++ if hasTrafGen;
+        trafSink.ipOut --> tn.in++ if hasTrafSink;
+        trafSink.ipIn <-- tn.out++ if hasTrafSink;
 }
 

@@ -36,6 +36,8 @@ OBJS = \
     $O/inet/applications/ethernet/EtherTrafGen.o \
     $O/inet/applications/generic/IpvxTrafGen.o \
     $O/inet/applications/generic/IpvxTrafSink.o \
+    $O/inet/applications/generic/LipsinRoute/LipsinRouteConfigurator.o \
+    $O/inet/applications/generic/LipsinRoute/LipsinTopoManager.o \
     $O/inet/applications/httptools/browser/HttpBrowser.o \
     $O/inet/applications/httptools/browser/HttpBrowserBase.o \
     $O/inet/applications/httptools/browser/HttpBrowserDirect.o \
@@ -217,6 +219,7 @@ OBJS = \
     $O/inet/common/packet/serializer/SliceChunkSerializer.o \
     $O/inet/common/packet/tag/RegionTagSet.o \
     $O/inet/common/packet/tag/TagSet.o \
+    $O/inet/common/scenario/SatScenarioManager.o \
     $O/inet/common/scenario/ScenarioManager.o \
     $O/inet/common/scheduler/RealTimeScheduler.o \
     $O/inet/common/socket/SocketMap.o \

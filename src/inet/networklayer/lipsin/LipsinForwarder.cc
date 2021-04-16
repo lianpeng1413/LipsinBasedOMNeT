@@ -5,6 +5,7 @@
  *      Author: root
  */
 #include "inet/applications/common/SocketTag_m.h"
+#include "inet/networklayer/ipv4/Ipv4Header_m.h"
 #include "inet/common/INETUtils.h"
 #include "inet/common/IProtocolRegistrationListener.h"
 #include "inet/common/LayeredProtocolBase.h"
@@ -122,7 +123,7 @@ void LipsinForwarder::handleMessageWhenUp(cMessage *msg)
             handleRequest(request);
         else{
             EV_INFO << "Received " << msg << " from Higher Network.\n";
-            handleIncomingDatagram(check_and_cast<Packet*>(msg));
+            handlePacketFromHL(check_and_cast<Packet*>(msg));
         }
     }
     else if (msg->arrivedOn("queueIn")) {    // from network
@@ -168,8 +169,10 @@ void LipsinForwarder::handleIncomingDatagram(Packet *packet){
             else{
                 InterfaceEntry* intfEntry = downLdEntry->getInterfaceEntry();
                 std::vector<LipsinLdEntry*> relatedLdEntryVector = plt->containsIntf(intfEntry);
-                if(relatedLdEntryVector.size() > 0)
+                if(relatedLdEntryVector.size() > 0){
                     head->addLinkToHadRoute(relatedLdEntryVector[0]->getLinkId());
+//                    head->addLinkToPreRoute(relatedLdEntryVector[0]->getLinkId());
+                }
             }
         }
     }
@@ -196,7 +199,78 @@ void LipsinForwarder::handleIncomingDatagram(Packet *packet){
         int nowlinkId = virLdEntry->getLinkId();
         if(head->hadRouteContains(nowlinkId) && intfEntry->isUp()){
             //forwarding to this intfEntry
+            EV_INFO << "the BF[1] hit link Id = " << nowlinkId <<endl;
+            if(!intfEntry->findNonce(head->getNonce())){
+                sendDatagramToOutput(packet->dup(),intfEntry->getInterfaceId());
+                intfEntry->insertNonce(head->getNonce());
+                EV_INFO<<"send this pkt and insert Nonce" <<endl;
+            }else{
+                EV_INFO<<"hit nonceTable and skip" <<endl;
+            }
+
+        }
+    }
+    sendPacketToHL(packet);
+//    packet->trim();
+//    delete packet;
+
+    //first : find the missing link
+    //second : adjust the header BF[1]
+    //third : search the physical & virtual up link and send the packet if match
+}
+void LipsinForwarder::sendPacketToHL(Packet *packet){
+    const auto& lipsinHeader = packet->removeAtFront<LipsinHeader>();
+    const auto& ipv4Header = packet->peekAtFront<Ipv4Header>();
+    auto transportProtocol = ProtocolGroup::ipprotocol.getProtocol(ipv4Header->getProtocolId());
+    packet->addTagIfAbsent<PacketProtocolTag>()->setProtocol(transportProtocol);
+    packet->addTagIfAbsent<DispatchProtocolReq>()->setProtocol(transportProtocol);
+    packet->insertAtFront(lipsinHeader);
+    send(packet, "transportOut");
+}
+void LipsinForwarder::handlePacketFromHL(Packet *packet){
+    //TODO:handleIncomingDatagram
+    packet->trim();
+    auto & head = packet->removeAtFront<LipsinHeader>();
+    for(int i=0;i<dlt->getNumLds();i++){
+        LipsinLdEntry * downLdEntry = dlt->getLd(i);
+        int nowlinkId = downLdEntry->getLinkId();
+        if(head->preRouteContains(nowlinkId)){
+            if(downLdEntry->getLipsinLdTable() == plt)
+                head->addLinkToHadRoute(nowlinkId); //add the link Id into the BF[1]
+            else{
+                InterfaceEntry* intfEntry = downLdEntry->getInterfaceEntry();
+                std::vector<LipsinLdEntry*> relatedLdEntryVector = plt->containsIntf(intfEntry);
+                if(relatedLdEntryVector.size() > 0){
+                    head->addLinkToHadRoute(relatedLdEntryVector[0]->getLinkId());
+//                    head->addLinkToPreRoute(relatedLdEntryVector[0]->getLinkId());
+                }
+            }
+        }
+    }
+    packet->insertAtFront(head);
+    for(int i=0;i<plt->getNumLds();i++){
+        LipsinLdEntry* phyLdEntry = plt->getLd(i);
+        InterfaceEntry* intfEntry = phyLdEntry->getInterfaceEntry();
+        int nowlinkId = phyLdEntry->getLinkId();
+        if(head->preRouteContains(nowlinkId) && intfEntry->isUp()){
+            //forwarding to this intfEntry
             EV_INFO << "the BF[0] hit link Id = " << nowlinkId <<endl;
+            if(!intfEntry->findNonce(head->getNonce())){
+                sendDatagramToOutput(packet->dup(),intfEntry->getInterfaceId());
+                intfEntry->insertNonce(head->getNonce());
+                EV_INFO<<"send this pkt and insert Nonce" <<endl;
+            }else{
+                EV_INFO<<"hit nonceTable and skip" <<endl;
+            }
+        }
+    }
+    for(int i=0;i<vlt->getNumLds();i++){
+        LipsinLdEntry* virLdEntry = vlt->getLd(i);
+        InterfaceEntry* intfEntry = virLdEntry->getInterfaceEntry();
+        int nowlinkId = virLdEntry->getLinkId();
+        if(head->hadRouteContains(nowlinkId) && intfEntry->isUp()){
+            //forwarding to this intfEntry
+            EV_INFO << "the BF[1] hit link Id = " << nowlinkId <<endl;
             if(!intfEntry->findNonce(head->getNonce())){
                 sendDatagramToOutput(packet->dup(),intfEntry->getInterfaceId());
                 intfEntry->insertNonce(head->getNonce());
@@ -209,13 +283,6 @@ void LipsinForwarder::handleIncomingDatagram(Packet *packet){
     }
     packet->trim();
     delete packet;
-
-    //first : find the missing link
-    //second : adjust the header BF[1]
-    //third : search the physical & virtual up link and send the packet if match
-}
-void LipsinForwarder::handlePacketFromHL(Packet *packet){
-    //TODO:handlePacketFromHL
 }
 
 void LipsinForwarder::sendDatagramToOutput(Packet *packet,int nic)
