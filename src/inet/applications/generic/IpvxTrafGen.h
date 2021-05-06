@@ -20,6 +20,7 @@
 #define __INET_IPVXTRAFGEN_H
 
 #include <vector>
+#include <regex>
 
 #include "inet/applications/base/ApplicationBase.h"
 #include "inet/applications/generic/IpvxTrafSink.h"
@@ -48,6 +49,7 @@ class INET_API IpvxTrafGen : public ApplicationBase
     const Protocol *protocol = nullptr;
     std::vector<L3Address> destAddresses;
     int numPackets = 0;
+    int leoId;
     bool hasLipsin = false;
     lipsin::LinkInfoTable *routeInfoTable;
     lipsin::LipsinTopoManager *topoManager;

@@ -99,6 +99,14 @@ void IpvxTrafGen::initialize(int stage)
 
         numSent = 0;
         numReceived = 0;
+
+        std::string nodeFullPath = this->getFullPath();
+        std::smatch match;
+        std::regex r("([[:w:]]+).LEO([0-9]+).([[:w:]]+)");
+        bool found = regex_search(nodeFullPath,match,r);
+        leoId = std::stoi(match.str(2));
+
+
         WATCH(numSent);
         WATCH(numReceived);
     }
@@ -108,15 +116,11 @@ void IpvxTrafGen::initialize(int stage)
         cXMLElement *lipsinConfig = par("lipsinConfig"),*script = par("script");
         if (!configurator.loadConfigFromXML(lipsinConfig))
                     throw cRuntimeError("IpvxTrafGen Error reading LIPSIN configuration from %s", lipsinConfig->getSourceLocation());
-        routeInfoTable->reCalculate(&linkSetById);
-        for(const auto &linkSetMap:linkSetById){
-            std::cout<< "destination "<< linkSetMap.first << std::endl;
-            for(const auto & link:*linkSetMap.second) std::cout<<link<<"\t";
-            std::cout<<std::endl;
-        }
+//        routeInfoTable->reCalculateSPFP(&linkSetById);
+        routeInfoTable->reCalculateSPF(&linkSetById);
         topoManager = new lipsin::LipsinTopoManager(routeInfoTable,this,&linkSetById);
         topoManager->loadConfigFromXML(script);
-        registerService(*protocol, nullptr, gate("ipIn"));
+//        registerService(*protocol, nullptr, gate("ipIn"));
         registerProtocol(*protocol, gate("ipOut"), nullptr);
     }
 }
@@ -240,18 +244,19 @@ void IpvxTrafGen::encapsulateLipsin(Packet *packet)
 {
     const auto& lipsinHeader = makeShared<LipsinHeader>();
 
-    lipsinHeader->addLinkToPreRoute(1); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(33); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(74); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(72); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(114); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(112); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(154); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(152); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(194); // can add pre route link id into BF[0]
-    lipsinHeader->addLinkToPreRoute(192); // can add pre route link id into BF[0]
-    packet->insertAtFront(lipsinHeader);
-    //preRoute(packet,61);
+//    lipsinHeader->addLinkToPreRoute(1); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(33); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(74); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(73); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(114); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(113); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(154); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(153); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(194); // can add pre route link id into BF[0]
+//    lipsinHeader->addLinkToPreRoute(193); // can add pre route link id into BF[0]
+//    packet->insertAtFront(lipsinHeader);
+
+    preRoute(packet,61);
 }
 void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
 {
@@ -275,6 +280,7 @@ void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
     }
 
     // set source and destination address
+    ipv4Header->setSrcAddress(Ipv4Address(192,168,0,leoId));
     ipv4Header->setDestAddress(dest);
 
     // set other fields
@@ -295,7 +301,7 @@ void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
         delete ecnReq;
     }
 
-    ipv4Header->setIdentification(0);
+    ipv4Header->setIdentification(numSent);
     ipv4Header->setMoreFragments(false);
     ipv4Header->setDontFragment(dontFragment);
     ipv4Header->setFragmentOffset(0);
@@ -324,8 +330,6 @@ void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
     ipv4Header->setHeaderLength(ipv4Header->getChunkLength());
     ipv4Header->setTotalLengthField(ipv4Header->getChunkLength() + transportPacket->getDataLength());
     transportPacket->insertAtFront(ipv4Header);
-//    insertNetworkProtocolHeader(transportPacket, Protocol::ipv4, ipv4Header);
-    // setting Ipv4 options is currently not supported
 
 }
 

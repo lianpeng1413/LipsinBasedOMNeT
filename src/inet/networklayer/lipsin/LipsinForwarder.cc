@@ -164,13 +164,16 @@ void LipsinForwarder::handleIncomingDatagram(Packet *packet){
         LipsinLdEntry * downLdEntry = dlt->getLd(i);
         int nowlinkId = downLdEntry->getLinkId();
         if(head->preRouteContains(nowlinkId)){
-            if(downLdEntry->getLipsinLdTable() == plt)
+            if(downLdEntry->getLipsinLdTable() == plt){
                 head->addLinkToHadRoute(nowlinkId); //add the link Id into the BF[1]
+//                EV_INFO<<"Physical Link DOWN ::BF[1] add physical link id:"<< nowlinkId<<endl;
+            }
             else{
                 InterfaceEntry* intfEntry = downLdEntry->getInterfaceEntry();
                 std::vector<LipsinLdEntry*> relatedLdEntryVector = plt->containsIntf(intfEntry);
                 if(relatedLdEntryVector.size() > 0){
                     head->addLinkToHadRoute(relatedLdEntryVector[0]->getLinkId());
+//                    EV_INFO<<"Virtual Link DOWN::BF[1] add physical link id:"<< relatedLdEntryVector[0]->getLinkId()<<endl;
 //                    head->addLinkToPreRoute(relatedLdEntryVector[0]->getLinkId());
                 }
             }
@@ -291,8 +294,8 @@ void LipsinForwarder::sendDatagramToOutput(Packet *packet,int nic)
     // output to the out interface
     packet->addTagIfAbsent<InterfaceReq>()->setInterfaceId(nic);
     const InterfaceEntry *ie = ift->getInterfaceById(packet->getTag<InterfaceReq>()->getInterfaceId());
-    if(!ie->isBroadcast() || ie->getMacAddress().isUnspecified())
-        sendPacketToNIC(packet);
+    packet->addTagIfAbsent<MacAddressReq>()->setDestAddress(MacAddress::BROADCAST_ADDRESS);
+    sendPacketToNIC(packet);
 
 }
 

@@ -55,14 +55,17 @@ void IpvxTrafSink::initialize(int stage)
             ProtocolGroup::ipprotocol.addProtocol(protocolId, protocol);
         }
         registerService(*protocol, nullptr, gate("ipIn"));
-        registerProtocol(*protocol, gate("ipOut"), nullptr);
+//        registerProtocol(*protocol, gate("ipOut"), nullptr);
 
         std::string nodeFullPath = this->getFullPath();
         std::smatch match;
-        std::regex r("([[:w:]]+)\.LEO([0-9]+)\.([[:w:]]+)");
+        std::regex r("([[:w:]]+).LEO([0-9]+).([[:w:]]+)");
         bool found = regex_search(nodeFullPath,match,r);
         leoId = std::stoi(match.str(2));
-        outFile = new std::ofstream("outSink.txt",std::ios::out|std::ios::trunc);
+
+        std::string fileName = "outSink.txt";
+//        std::cout<<fileName<<std::endl<<leoId<<std::endl;
+        outFile = new std::ofstream(fileName,std::ios::out|std::ios::app);
         if(!outFile->is_open()) throw cRuntimeError("Failed to open the file outSink.txt");
     }
 }
@@ -110,10 +113,10 @@ void IpvxTrafSink::processPacket(Packet *msg)
     const auto & lipsinHeader = msg->removeAtFront<LipsinHeader>();
     const auto & ipHeader = msg->removeAtFront<Ipv4Header>();
     EV_INFO << leoId << " Received packet:";
-    std::string s = (std::string("192.168.0.") + std::to_string(leoId));
-    Ipv4Address addr(s.data());
+    Ipv4Address addr(192,168,0,leoId);
     if(ipHeader->getDestAddress() == addr) {
-        (*outFile)<<"Time:"<<simTime()<<"\t"<<numReceived++<<std::endl;
+        (*outFile)<<"Time:"<<simTime()<<"\t"<<ipHeader->getSrcAddress()<<"\t"<<ipHeader->getIdentification()<<std::endl;
+        numReceived++;
     }
 
     printPacket(msg);
@@ -122,6 +125,11 @@ void IpvxTrafSink::processPacket(Packet *msg)
     delete msg;
     numTransitted++;
 
+}
+void IpvxTrafSink::handleStopOperation(LifecycleOperation *operation){
+    (*outFile)<<leoId<<"\t"<<numReceived<<"\t"<<numTransitted<<std::endl;
+    outFile->close();
+    delete outFile;
 }
 
 } // namespace inet

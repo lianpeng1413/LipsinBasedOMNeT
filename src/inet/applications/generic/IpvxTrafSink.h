@@ -45,13 +45,18 @@ class INET_API IpvxTrafSink : public ApplicationBase
     virtual void printPacket(Packet *msg);
     virtual void processPacket(Packet *msg);
 
+    ~IpvxTrafSink(){
+        (*outFile)<<leoId<<"\t"<<numReceived<<"\t"<<numTransitted<<std::endl;
+        outFile->close();
+        delete outFile;
+    }
     virtual void initialize(int stage) override;
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
     virtual void handleMessageWhenUp(cMessage *msg) override;
     virtual void refreshDisplay() const override;
 
     virtual void handleStartOperation(LifecycleOperation *operation) override { }
-    virtual void handleStopOperation(LifecycleOperation *operation) override { outFile->close(); delete outFile; }
+    virtual void handleStopOperation(LifecycleOperation *operation);
     virtual void handleCrashOperation(LifecycleOperation *operation) override { }
 };
 
