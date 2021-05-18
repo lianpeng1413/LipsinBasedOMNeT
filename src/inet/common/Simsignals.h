@@ -114,7 +114,11 @@ extern INET_API simsignal_t    // admin
     packetReceivedSignal,
 
     packetPushedSignal,
-    packetPoppedSignal;
+    packetPoppedSignal,
+
+    congestionChangedSignal,
+    checkISLDistanceSignal,
+    islDistanceMeasureSignal;
 
 /**
  * Utility function

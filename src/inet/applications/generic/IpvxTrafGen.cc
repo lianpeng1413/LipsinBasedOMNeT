@@ -242,8 +242,8 @@ void IpvxTrafGen::preRoute(Packet *packet,int dest){
 }
 void IpvxTrafGen::encapsulateLipsin(Packet *packet)
 {
+    const auto & ipv4Head = packet->removeAtFront<Ipv4Header>();
     const auto& lipsinHeader = makeShared<LipsinHeader>();
-
 //    lipsinHeader->addLinkToPreRoute(1); // can add pre route link id into BF[0]
 //    lipsinHeader->addLinkToPreRoute(33); // can add pre route link id into BF[0]
 //    lipsinHeader->addLinkToPreRoute(74); // can add pre route link id into BF[0]
@@ -255,8 +255,10 @@ void IpvxTrafGen::encapsulateLipsin(Packet *packet)
 //    lipsinHeader->addLinkToPreRoute(194); // can add pre route link id into BF[0]
 //    lipsinHeader->addLinkToPreRoute(193); // can add pre route link id into BF[0]
 //    packet->insertAtFront(lipsinHeader);
-
-    preRoute(packet,61);
+    Ipv4Address dest = ipv4Head->getDestAddress();
+    int destLeoId = dest.getDByte(3);
+    packet->insertAtFront(ipv4Head);
+    preRoute(packet,destLeoId);
 }
 void IpvxTrafGen::encapsulateIpv4(Packet *transportPacket)
 {

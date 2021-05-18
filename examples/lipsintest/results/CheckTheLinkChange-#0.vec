@@ -1,20 +1,20 @@
 version 2
-run CheckTheLinkChange-0-20210322-17:17:11-142455
+run CheckTheLinkChange-0-20210407-09:24:01-76740
 attr configname CheckTheLinkChange
-attr datetime 20210322-17:17:11
+attr datetime 20210407-09:24:01
 attr experiment CheckTheLinkChange
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network SimpleTest
-attr processid 142455
+attr processid 76740
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-param **.scenarioManager.script "xml( \t\t\"<script>\\n:\" + \t\t\"<at t='3s'><shutdown module='R1.ppp[0]'/></at>\\n\" + \t\t\"<at t='4.3s'><disconnect src-module='R1' src-gate='pppg[0]' /></at>\\n\" + \t\t\"<at t='5s'><connect src-module='R1' src-gate='pppg[0]' dest-module='R4' dest-gate='pppg[0]' channel-type='inet.examples.lipsintest.SimpleTest.C'/></at>\\n\" + \t\t\"</script>\")"
+param **.scenarioManager.script "xml( \t\t\"<script>\\n:\" + \t\t\"<at t='4.3s'><disconnect src-module='R1' src-gate='pppg[0]' /></at>\\n\" + \t\t\"<at t='5s'><connect src-module='R1' src-gate='pppg[0]' dest-module='R4' dest-gate='pppg[0]' channel-type='inet.examples.lipsintest.SimpleTest.C'/></at>\\n\" + \t\t\"</script>\")"
 param **.ospf.ospfConfig "xmldoc(\"ASConfig.xml\")"
 param **.lipsinConfig "xmldoc(\"lipsinConfig.xml\")"
 param **.R1.trafGen.startTime 4s

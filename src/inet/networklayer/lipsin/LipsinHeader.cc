@@ -44,4 +44,6 @@ void LipsinHeader::addLinkToHadRoute(int linkID)
     if(!init) initialize();
     this->hadRoute->insert(linkID);
 }
+int LipsinHeader::getPacketType(){ return this->msgType;}
+void LipsinHeader::setPacketType(int type){ this->msgType = type; }
 }

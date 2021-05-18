@@ -23,15 +23,22 @@
 
 namespace inet {
 namespace queueing {
-
+Register_Abstract_Class(CongestionChangeDetails);
 Define_Module(PacketQueue);
 
+std::string CongestionChangeDetails::str() const
+{
+    std::stringstream out;
+    out << obj->getFullPath() << " changed congestionState: " << congestionState << "\n";
+    return out.str();
+}
 void PacketQueue::initialize(int stage)
 {
     PacketQueueBase::initialize(stage);
     if (stage == INITSTAGE_LOCAL) {
         queue.setName("storage");
         inputGate = gate("in");
+        congestionCheck = par("congestionCheck");
         producer = findConnectedModule<IActivePacketSource>(inputGate);
         outputGate = gate("out");
         collector = findConnectedModule<IActivePacketSink>(outputGate);
@@ -92,9 +99,37 @@ Packet *PacketQueue::getPacket(int index) const
         throw cRuntimeError("index %i out of range", index);
     return check_and_cast<Packet *>(queue.get(index));
 }
+void PacketQueue::congestionCheckandEmitSignal()
+{
+    bool isChanged = false;
+    if(packetCapacity == -1) return;
+    double ratio = ((double)getNumPackets())/packetCapacity;
+    if(ratio <= 0.2){
+        if(occupancy != 0) isChanged = true;
+        occupancy = 0;
+    }else if(ratio <= 0.4){
+        if(occupancy != 1) isChanged = true;
+        occupancy = 1;
+    }else if(ratio <= 0.6){
+        if(occupancy != 2) isChanged = true;
+        occupancy = 2;
+    }else if(ratio <= 0.8){
+        if(occupancy != 3) isChanged = true;
+        occupancy = 3;
+    }else{
+        if(occupancy != 4) isChanged = true;
+        occupancy = 4;
+    }
+    if(isChanged){
+        cObject *ethernetPtr = this->getOwner()->getOwner();
+        CongestionChangeDetails changeDetails(ethernetPtr,occupancy);
+        emit(congestionChangedSignal,&changeDetails);
+    }
 
+}
 void PacketQueue::pushPacket(Packet *packet, cGate *gate)
 {
+    if(congestionCheck) congestionCheckandEmitSignal();
     Enter_Method("pushPacket");
     EV_INFO << "Pushing packet " << packet->getName() << " into the queue." << endl;
     queue.insert(packet);
@@ -116,10 +151,12 @@ void PacketQueue::pushPacket(Packet *packet, cGate *gate)
     updateDisplayString();
     if (collector != nullptr && getNumPackets() != 0)
         collector->handleCanPopPacket(outputGate);
+
 }
 
 Packet *PacketQueue::popPacket(cGate *gate)
 {
+    if(congestionCheck) congestionCheckandEmitSignal();
     Enter_Method("popPacket");
     auto packet = check_and_cast<Packet *>(queue.front());
     EV_INFO << "Popping packet " << packet->getName() << " from the queue." << endl;

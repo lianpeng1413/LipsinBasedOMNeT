@@ -38,6 +38,8 @@ public:
     virtual int getNumLds() const { return ldTable.size(); }
     virtual LipsinLdEntry *getLd(int k);
     void addEntry(LipsinLdEntry* entry);
+    void updateEntryCost(const InterfaceEntry* entry,int cost);
+    void updateEntryDistance(const InterfaceEntry* entry,int distance);
     std::vector<LipsinLdEntry *>  containsIntf(const InterfaceEntry* entry) const;
     void removeEntryByIntf(const InterfaceEntry* entry) ;
     void removeEntry(LipsinLdEntry* entry);

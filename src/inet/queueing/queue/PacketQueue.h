@@ -29,6 +29,18 @@
 namespace inet {
 namespace queueing {
 
+class INET_API CongestionChangeDetails : public cObject
+{
+    cObject *obj;
+    int congestionState;
+
+  public:
+    CongestionChangeDetails(cObject *object, int congestionState) : obj(object), congestionState(congestionState) {  }
+    cObject *getcObject() const { return obj; }
+    int getCongestionState() const { return congestionState; }
+    virtual std::string str() const override;
+};
+
 class INET_API PacketQueue : public PacketQueueBase, public IPacketBuffer::ICallback
 {
   protected:
@@ -38,6 +50,8 @@ class INET_API PacketQueue : public PacketQueueBase, public IPacketBuffer::ICall
     cGate *outputGate = nullptr;
     IActivePacketSink *collector = nullptr;
 
+    bool congestionCheck = false;
+    int occupancy = 0;
     int packetCapacity = -1;
     b dataCapacity = b(-1);
 
@@ -53,13 +67,13 @@ class INET_API PacketQueue : public PacketQueueBase, public IPacketBuffer::ICall
     virtual IPacketComparatorFunction *createComparatorFunction(const char *comparatorClass) const;
     virtual void handleMessage(cMessage *message) override;
     virtual bool isOverloaded() const;
-
   public:
     virtual ~PacketQueue() { delete packetDropperFunction; }
 
     virtual int getMaxNumPackets() const override { return packetCapacity; }
     virtual int getNumPackets() const override;
 
+    virtual void congestionCheckandEmitSignal();
     virtual b getMaxTotalLength() const override { return dataCapacity; }
     virtual b getTotalLength() const override { return b(queue.getBitLength()); }
 

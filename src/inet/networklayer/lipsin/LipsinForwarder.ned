@@ -33,6 +33,7 @@ simple LipsinForwarder like ILipsin
         string physicalLinkTableModule;
         string virtualLinkTableModule;
         double deletePeriod @unit(s) = default(60s);
+        double islCheckInterval @unit(s) = default(10s);
         xml lipsinConfig = default(xmldoc("lipsinConfig.xml"));
         @display("i=block/routing");
         

@@ -35,6 +35,7 @@ ThruputMeteringChannel::ThruputMeteringChannel(const char *name) : cDatarateChan
     intvlNumPackets = intvlNumBits = 0;
 
     currentBitPerSec = currentPkPerSec = 0;
+
 }
 
 ThruputMeteringChannel::~ThruputMeteringChannel()
@@ -80,6 +81,7 @@ OMNETPP5_CODE(void ThruputMeteringChannel::processMessage(cMessage *msg, simtime
     intvlNumPackets++;
     intvlNumBits += pkt->getBitLength();
     intvlLastPkTime = t;
+
     OMNETPP6_CODE(return result;)
 }
 

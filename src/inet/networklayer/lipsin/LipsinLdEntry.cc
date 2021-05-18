@@ -23,6 +23,7 @@ LipsinLdEntry::LipsinLdEntry()
     destId = 0;
     linkId = 0;
     cost = 0;
+    distance = 4500;
 }
 LipsinLdEntry::LipsinLdEntry(InterfaceEntry* _interfacePtr,LipsinLdTable * _ldt,int _srcId,int _destId,int _linkId,int _cost):
                 interfacePtr(_interfacePtr),ldt(_ldt),srcId(_srcId),destId(_destId),linkId(_linkId),cost(_cost){}
@@ -30,7 +31,7 @@ LipsinLdEntry::LipsinLdEntry(InterfaceEntry* _interfacePtr,LipsinLdTable * _ldt,
 std::string LipsinLdEntry::str() const
 {
     std::stringstream out;
-    out << srcId << " -- (linkID = " << linkId << " )--> " << destId << ", cost = " << cost ;
+    out << srcId << " -- (linkID = " << linkId << " )--> " << destId << ", cost = " << cost << " , distance = " << distance;
     out << " " << interfacePtr->str();
     return out.str();
 }
@@ -40,6 +41,7 @@ bool LipsinLdEntry::equals(const LipsinLdEntry& ldEntry) const
             (linkId == ldEntry.linkId) &&
             (destId == ldEntry.destId) &&
             (cost == ldEntry.cost) &&
+            (distance == ldEntry.distance) &&
             (interfacePtr == ldEntry.interfacePtr);
 }
 
