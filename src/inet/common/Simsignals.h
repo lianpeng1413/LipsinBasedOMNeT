@@ -117,8 +117,8 @@ extern INET_API simsignal_t    // admin
     packetPoppedSignal,
 
     congestionChangedSignal,
-    checkISLDistanceSignal,
-    islDistanceMeasureSignal;
+    enterPolarAreaSignal,
+    leavePolarAreaSignal;
 
 /**
  * Utility function

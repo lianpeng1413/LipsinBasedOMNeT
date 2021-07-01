@@ -38,7 +38,6 @@ class LipsinHeader extends FieldsChunk
     chunkLength = LIPSIN_HEADER_LENGTH;
     bool init = false;
     uint64_t nonce;
-    uint32_t msgType;
     BloomParameters para;
     BloomFilter* preRoute;
     BloomFilter* hadRoute;
@@ -54,10 +53,7 @@ cplusplus(LipsinHeader){{
                 preRoute = new BloomFilter(para);
                 hadRoute = new BloomFilter(para);
                 nonce = rand();
-                setPacketType(0); // 0 = unicast , 1 = multicast , 2 = broadcast
 		}
-		virtual void setPacketType(int type);
-		virtual int getPacketType();
 		virtual bool preRouteContains(int linkID);
 		virtual void addLinkToPreRoute(int linkID);
 		virtual bool hadRouteContains(int linkID);

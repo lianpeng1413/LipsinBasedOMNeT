@@ -81,13 +81,5 @@ void LipsinLdTable::updateEntryCost(const InterfaceEntry* entry,int cost){
         }
     }
 }
-void LipsinLdTable::updateEntryDistance(const InterfaceEntry* entry,int distance){
-    for(int i=0;i<ldTable.size();i++){
-        if(ldTable[i]->getInterfaceEntry() == entry){
-            ldTable[i]->setDistance(distance);
-            std::cout << "Successfully update the Entry "<< ldTable[i]->str()<<"  from " << tableName << endl;
-        }
-    }
-}
 
 } /* namespace inet */

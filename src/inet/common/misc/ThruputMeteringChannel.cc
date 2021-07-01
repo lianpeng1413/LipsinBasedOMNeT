@@ -35,7 +35,7 @@ ThruputMeteringChannel::ThruputMeteringChannel(const char *name) : cDatarateChan
     intvlNumPackets = intvlNumBits = 0;
 
     currentBitPerSec = currentPkPerSec = 0;
-
+    std::cout << "ThruputMeteringChannel::name: " << name <<std::endl;
 }
 
 ThruputMeteringChannel::~ThruputMeteringChannel()
@@ -81,7 +81,6 @@ OMNETPP5_CODE(void ThruputMeteringChannel::processMessage(cMessage *msg, simtime
     intvlNumPackets++;
     intvlNumBits += pkt->getBitLength();
     intvlLastPkTime = t;
-
     OMNETPP6_CODE(return result;)
 }
 
@@ -100,6 +99,7 @@ void ThruputMeteringChannel::beginNewInterval(simtime_t now)
 
 void ThruputMeteringChannel::refreshDisplay() const
 {
+    std::cout << "getFullPath:"<< this->getFullPath() <<std::endl;
     // produce label, based on format string
     char buf[200];
     char *p = buf;

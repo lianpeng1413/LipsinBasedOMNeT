@@ -29,14 +29,7 @@
 #include <regex>
 namespace inet {
 Define_Module(LipsinForwarder);
-Register_Abstract_Class(ISLDistanceChangeDetails);
 
-std::string ISLDistanceChangeDetails::str() const
-{
-    std::stringstream out;
-    out << obj->getFullPath() << " changed distance: " << distance << "\n";
-    return out.str();
-}
 LipsinForwarder::LipsinForwarder()
 {
 }
@@ -55,10 +48,8 @@ void LipsinForwarder::initialize(int stage)
         vlt = getModuleFromPar<LipsinLdTable>(par("virtualLinkTableModule"),this);
         dlt = getModuleFromPar<LipsinLdTable>(par("downLinkTableModule"),this);
         deletePeriod = par("deletePeriod");
-        islCheckInterval = par("islCheckInterval");
         transportInGateBaseId = gateBaseId("transportIn");
         host = getContainingNode(this);
-        islDistanceTimer = new cMessage("islDistanceTimer");
         numMulticast = numLocalDeliver = numDropped = numUnroutable = numForwarded = 0;
         registerService(Protocol::lipsin, gate("transportIn"), gate("queueIn"));
         registerProtocol(Protocol::lipsin, gate("queueOut"), gate("transportOut"));
@@ -81,7 +72,6 @@ void LipsinForwarder::subscribe()
     host->subscribe(interfaceDeletedSignal, this);
     host->subscribe(interfaceStateChangedSignal, this);
     host->subscribe(congestionChangedSignal, this);
-    host->subscribe(islDistanceMeasureSignal, this);
 }
 
 void LipsinForwarder::unsubscribe()
@@ -90,7 +80,6 @@ void LipsinForwarder::unsubscribe()
     host->unsubscribe(interfaceDeletedSignal, this);
     host->unsubscribe(interfaceStateChangedSignal, this);
     host->unsubscribe(congestionChangedSignal, this);
-    host->unsubscribe(islDistanceMeasureSignal, this);
 }
 
 void LipsinForwarder::handleRegisterService(const Protocol& protocol, cGate *out, ServicePrimitive servicePrimitive)
@@ -124,7 +113,7 @@ void LipsinForwarder::refreshDisplay() const
 }
 
 void LipsinForwarder::handleRequest(Request *request)
-{ // TODO:
+{ // TODO: buried point for APP above lipsin
     auto ctrl = request->getControlInfo();
     if(ctrl == nullptr)
         throw cRuntimeError("Request '%s' arrived without controlinfo",request->getName());
@@ -132,12 +121,7 @@ void LipsinForwarder::handleRequest(Request *request)
 
 void LipsinForwarder::handleMessageWhenUp(cMessage *msg)
 {
-    if (msg == islDistanceTimer){
-        emit(checkISLDistanceSignal,msg);
-        simtime_t next = simTime() + islCheckInterval;
-        scheduleAt(next, islDistanceTimer);
-    }
-    else if (msg->arrivedOn("transportIn")) {    //TODO packet->getArrivalGate()->getBaseId() == transportInGateBaseId
+    if (msg->arrivedOn("transportIn")) {    //TODO packet->getArrivalGate()->getBaseId() == transportInGateBaseId
         if (auto request = dynamic_cast<Request *>(msg))
             handleRequest(request);
         else{
@@ -354,7 +338,6 @@ void LipsinForwarder::receiveSignal(cComponent *source, simsignal_t signalID, cO
     const InterfaceEntry *ie;
     const InterfaceEntryChangeDetails *change;
     const queueing::CongestionChangeDetails *congestionChange;
-    const ISLDistanceChangeDetails *distanceChange;
 
     if (signalID == interfaceCreatedSignal) {
         // configure interface for RIP
@@ -397,6 +380,7 @@ void LipsinForwarder::receiveSignal(cComponent *source, simsignal_t signalID, cO
         std::regex r("([[:w:]]+).LEO([0-9]+).([a-z]+)\\[([0-9])\\]");//OsgEarthNet.LEO0.eth[0]
         bool found = regex_search(fullPath,match,r);
         std::stringstream ss;
+//        std::cout<<found<<std::endl<<fullPath<<std::endl<<match[3].str()<<match[4].str()<<std::endl;
         ss<<match[3].str()<<match[4].str();
         char ifName[4];
         ss>>ifName;
@@ -407,14 +391,14 @@ void LipsinForwarder::receiveSignal(cComponent *source, simsignal_t signalID, cO
                 // down -> up
                 std::cout<<"nowState: "<<nowState<<" maybe down->up AND update this interface " << ifName <<  " Entry Cost"<<std::endl;
                 dlt->removeEntryByIntf(ie);
-                int nowCost = nowState;
+                int nowCost = nowState + 2;//add the distance
                 vlt->updateEntryCost(ie, nowCost);
                 plt->updateEntryCost(ie, nowCost);
             }
         }else{
             //up -> down (very congested!!!)
             if(ie != nullptr){
-                std::cout<<"nowState: "<< nowState <<" shutdown all Entry about this interface "<< ifName << std::endl;
+                std::cout<<"nowState: "<<nowState<<" shutdown all Entry about this interface "<<ifName << std::endl;
                 std::vector<LipsinLdEntry *>  relatedPhyLdEntry = plt->containsIntf(ie),
                         relatedVirLdEntry = vlt->containsIntf(ie);
                 for(int i=0;i<relatedPhyLdEntry.size();i++)
@@ -423,17 +407,6 @@ void LipsinForwarder::receiveSignal(cComponent *source, simsignal_t signalID, cO
                     dlt->addEntry(relatedVirLdEntry[i]);
             }
         }
-    }
-    else if(signalID == islDistanceMeasureSignal){
-        distanceChange = check_and_cast<const ISLDistanceChangeDetails *>(obj);
-        std::cout<< distanceChange->getcObject()->getFullPath() << " emit a signal: ISL distance = " << distanceChange->getDistance() << std::endl;
-        std::string fullPath(distanceChange->getcObject()->getOwner()->getFullPath());
-        std::smatch match;
-        std::regex r("([[:w:]]+).LEO([0-9]+).([a-z]+)g\\$o\\[([0-9])\\]");//OsgEarthNet.LEO0.eth[0]
-        bool found = regex_search(fullPath,match,r);
-        std::string ifname = match[3].str() + match[4].str();
-        InterfaceEntry *ie = ift->findInterfaceByName(ifname.c_str());
-        vlt->updateEntryDistance(ie, distanceChange->getDistance());
     }
     else
         throw cRuntimeError("Unexpected signal: %s", getSignalName(signalID));
@@ -470,6 +443,7 @@ INetfilter::IHook::Result LipsinForwarder::datagramLocalOutHook(Packet *datagram
 
 void LipsinForwarder::registerHook(int priority, IHook *hook)
 {
+
 }
 
 
@@ -490,17 +464,12 @@ void LipsinForwarder::reinjectQueuedDatagram(const Packet *datagram)
 }
 void LipsinForwarder::start()
 {
-    simtime_t next = simTime() + islCheckInterval;
-    scheduleAt(next, islDistanceTimer);
-
 }
 
 void LipsinForwarder::stop()
 {
-    cancelEvent(islDistanceTimer);
 }
 void LipsinForwarder::flush()
 {
-    cancelEvent(islDistanceTimer);
 }
 } /* namespace inet */

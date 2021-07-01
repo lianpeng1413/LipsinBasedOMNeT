@@ -25,7 +25,6 @@ private:
     int destId;// dest Host Id
     int linkId; // src -- linkId --> dest
     int cost; //the cost between src and dest
-    int distance = 4500; // the distance between src and dest
 
 protected:
     //virtual int numInitStages() const override { return NUM_INIT_STAGES; }
@@ -52,8 +51,6 @@ public:
     virtual void setLinkId(int linkId){ this->linkId = linkId; }
     int getLinkId() const { return linkId; }
     virtual void setCost(int cost){ this->cost = cost; }
-    int getDistance() const { return distance;}
-    virtual void setDistance(int distance){ this->distance = distance; }
     int getCost() const { return cost; }
     virtual void changed(int changeCode) const;
 };

@@ -23,18 +23,6 @@
 #include "inet/networklayer/lipsin/LipsinLdTable.h"
 #include "inet/networklayer/lipsin/LipsinNeighborTable.h"
 namespace inet {
-class INET_API ISLDistanceChangeDetails : public cObject
-{
-    cObject *obj;
-    int distance;
-
-  public:
-    ISLDistanceChangeDetails(cObject *object, int distance) : obj(object), distance(distance) {  }
-    cObject *getcObject() const { return obj; }
-    int getDistance() const { return distance; }
-    virtual std::string str() const override;
-};
-
 class INET_API LipsinForwarder : public OperationalBase, public NetfilterBase, public INetworkProtocol,public IProtocolRegistrationListener, public cListener
 {
     public:
@@ -68,8 +56,7 @@ class INET_API LipsinForwarder : public OperationalBase, public NetfilterBase, p
             std::string directBroadcastInterfaces = "";
 
             cPatternMatcher directBroadcastInterfaceMatcher;
-            cMessage *islDistanceTimer = nullptr;
-            simtime_t islCheckInterval;
+
             std::set<const Protocol *> upperProtocols;
 
             //statistics

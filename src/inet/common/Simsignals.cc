@@ -45,8 +45,8 @@ simsignal_t interfaceClnsConfigChangedSignal = cComponent::registerSignal("inter
 simsignal_t tedChangedSignal = cComponent::registerSignal("tedChanged");
 
 simsignal_t congestionChangedSignal = cComponent::registerSignal("congestionChangedSignal");
-simsignal_t checkISLDistanceSignal = cComponent::registerSignal("checkISLDistanceSignal");
-simsignal_t islDistanceMeasureSignal = cComponent::registerSignal("islDistanceMeasureSignal");
+simsignal_t enterPolarAreaSignal = cComponent::registerSignal("enterPolarAreaSignal");
+simsignal_t leavePolarAreaSignal = cComponent::registerSignal("leavePolarAreaSignal");
 
 // layer 3 - Routing Table
 simsignal_t routeAddedSignal = cComponent::registerSignal("routeAdded");
