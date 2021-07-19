@@ -118,7 +118,8 @@ extern INET_API simsignal_t    // admin
 
     congestionChangedSignal,
     enterPolarAreaSignal,
-    leavePolarAreaSignal;
+    leavePolarAreaSignal,
+    checkSatToGroundSignal;
 
 /**
  * Utility function

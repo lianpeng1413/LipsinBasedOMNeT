@@ -1,4 +1,4 @@
-file 2495 1616404646                                            
+file 2495 1625125952                                            
 version 2
 run CheckTheLinkChange-0-20210322-17:17:11-142455
 attr configname CheckTheLinkChange
@@ -29,40 +29,39 @@ vector 0 SimpleTest.R1.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+0	2430 8 0 0 0 0 1 0 0 0 0
 vector 1 SimpleTest.R1.ppp[1].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+1	2438 8 0 0 0 0 1 0 0 0 0
 vector 2 SimpleTest.R2.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+2	2446 8 0 0 0 0 1 0 0 0 0
 vector 3 SimpleTest.R2.ppp[1].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+3	2454 8 0 0 0 0 1 0 0 0 0
 vector 4 SimpleTest.R3.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+4	2462 8 0 0 0 0 1 0 0 0 0
 vector 5 SimpleTest.R3.ppp[1].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+5	2470 8 0 0 0 0 1 0 0 0 0
 vector 6 SimpleTest.R4.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+6	2478 8 0 0 0 0 1 0 0 0 0
 vector 7 SimpleTest.R4.ppp[1].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
-0	2430 8 0 0 0 0 1 0 0 0 0
-1	2438 8 0 0 0 0 1 0 0 0 0
-2	2446 8 0 0 0 0 1 0 0 0 0
-3	2454 8 0 0 0 0 1 0 0 0 0
-4	2462 8 0 0 0 0 1 0 0 0 0
-5	2470 8 0 0 0 0 1 0 0 0 0
-6	2478 8 0 0 0 0 1 0 0 0 0
-7	2486 8 0 0 0 0 1 0 0 0 0
-
+7	2486 9 0 0 0 0 1 0 0 0 0

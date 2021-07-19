@@ -47,6 +47,7 @@ simsignal_t tedChangedSignal = cComponent::registerSignal("tedChanged");
 simsignal_t congestionChangedSignal = cComponent::registerSignal("congestionChangedSignal");
 simsignal_t enterPolarAreaSignal = cComponent::registerSignal("enterPolarAreaSignal");
 simsignal_t leavePolarAreaSignal = cComponent::registerSignal("leavePolarAreaSignal");
+simsignal_t checkSatToGroundSignal = cComponent::registerSignal("checkSatToGroundSignal");
 
 // layer 3 - Routing Table
 simsignal_t routeAddedSignal = cComponent::registerSignal("routeAdded");

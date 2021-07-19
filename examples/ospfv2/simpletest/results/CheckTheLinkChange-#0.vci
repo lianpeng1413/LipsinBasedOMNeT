@@ -1,4 +1,4 @@
-file 1404 1616394327                                            
+file 1404 1616394326                                            
 version 2
 run CheckTheLinkChange-0-20210322-14:25:23-132755
 attr configname CheckTheLinkChange
@@ -29,10 +29,9 @@ vector 0 SimpleTest.R2.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+0	1387 8 0 0 0 0 1 0 0 0 0
 vector 1 SimpleTest.R4.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
-0	1387 8 0 0 0 0 1 0 0 0 0
-1	1395 8 0 0 0 0 1 0 0 0 0
-
+1	1395 9 0 0 0 0 1 0 0 0 0
