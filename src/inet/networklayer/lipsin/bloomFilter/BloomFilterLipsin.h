@@ -161,7 +161,7 @@ public:
 
 };
 
-class BloomFilter
+class BloomFilterLipsin
 {
 protected:
 
@@ -171,7 +171,7 @@ protected:
 
 public:
 
-   BloomFilter()
+   BloomFilterLipsin()
    : salt_count_(0),
      table_size_(0),
      projected_element_count_(0),
@@ -180,7 +180,7 @@ public:
      desired_false_positive_probability_(0.0)
    {}
 
-   BloomFilter(const BloomParameters& p)
+   BloomFilterLipsin(const BloomParameters& p)
    : projected_element_count_(p.projected_element_count),
      inserted_element_count_(0),
      random_seed_((p.random_seed * 0xA5A5A5A5) + 1),
@@ -194,12 +194,12 @@ public:
       bit_table_.resize(table_size_ / bits_per_char, static_cast<unsigned char>(0x00));
    }
 
-   BloomFilter(const BloomFilter& filter)
+   BloomFilterLipsin(const BloomFilterLipsin& filter)
    {
       this->operator=(filter);
    }
 
-   inline bool operator == (const BloomFilter& f) const
+   inline bool operator == (const BloomFilterLipsin& f) const
    {
       if (this != &f)
       {
@@ -218,12 +218,12 @@ public:
          return true;
    }
 
-   inline bool operator != (const BloomFilter& f) const
+   inline bool operator != (const BloomFilterLipsin& f) const
    {
       return !operator==(f);
    }
 
-   inline BloomFilter& operator = (const BloomFilter& f)
+   inline BloomFilterLipsin& operator = (const BloomFilterLipsin& f)
    {
       if (this != &f)
       {
@@ -243,7 +243,7 @@ public:
       return *this;
    }
 
-   virtual ~BloomFilter()
+   virtual ~BloomFilterLipsin()
    {}
 
    inline bool operator!() const
@@ -392,7 +392,7 @@ public:
       return std::pow(1.0 - std::exp(-1.0 * salt_.size() * inserted_element_count_ / size()), 1.0 * salt_.size());
    }
 
-   inline BloomFilter& operator &= (const BloomFilter& f)
+   inline BloomFilterLipsin& operator &= (const BloomFilterLipsin& f)
    {
       /* intersection */
       if (
@@ -410,7 +410,7 @@ public:
       return *this;
    }
 
-   inline BloomFilter& operator |= (const BloomFilter& f)
+   inline BloomFilterLipsin& operator |= (const BloomFilterLipsin& f)
    {
       /* union */
       if (
@@ -428,7 +428,7 @@ public:
       return *this;
    }
 
-   inline BloomFilter& operator ^= (const BloomFilter& f)
+   inline BloomFilterLipsin& operator ^= (const BloomFilterLipsin& f)
    {
       /* difference */
       if (
@@ -617,33 +617,33 @@ protected:
    double                     desired_false_positive_probability_;
 };
 
-inline BloomFilter operator & (const BloomFilter& a, const BloomFilter& b)
+inline BloomFilterLipsin operator & (const BloomFilterLipsin& a, const BloomFilterLipsin& b)
 {
-   BloomFilter result = a;
+   BloomFilterLipsin result = a;
    result &= b;
    return result;
 }
 
-inline BloomFilter operator | (const BloomFilter& a, const BloomFilter& b)
+inline BloomFilterLipsin operator | (const BloomFilterLipsin& a, const BloomFilterLipsin& b)
 {
-   BloomFilter result = a;
+   BloomFilterLipsin result = a;
    result |= b;
    return result;
 }
 
-inline BloomFilter operator ^ (const BloomFilter& a, const BloomFilter& b)
+inline BloomFilterLipsin operator ^ (const BloomFilterLipsin& a, const BloomFilterLipsin& b)
 {
-   BloomFilter result = a;
+   BloomFilterLipsin result = a;
    result ^= b;
    return result;
 }
 
-class compressible_BloomFilter : public BloomFilter
+class compressible_BloomFilter : public BloomFilterLipsin
 {
 public:
 
    compressible_BloomFilter(const BloomParameters& p)
-   : BloomFilter(p)
+   : BloomFilterLipsin(p)
    {
       size_list.push_back(table_size_);
    }

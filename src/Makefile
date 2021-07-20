@@ -485,6 +485,9 @@ OBJS = \
     $O/inet/networklayer/contract/ipv6/Ipv6Address.o \
     $O/inet/networklayer/contract/ipv6/Ipv6AddressType.o \
     $O/inet/networklayer/contract/ipv6/Ipv6Socket.o \
+    $O/inet/networklayer/contract/ndn/iName.o \
+    $O/inet/networklayer/contract/ndn/iType.o \
+    $O/inet/networklayer/contract/ndn/ndnSocket.o \
     $O/inet/networklayer/diffserv/BehaviorAggregateClassifier.o \
     $O/inet/networklayer/diffserv/DiffservUtil.o \
     $O/inet/networklayer/diffserv/DscpMarker.o \
@@ -1249,6 +1252,10 @@ OBJS = \
     $O/inet/networklayer/contract/ipv4/Ipv4SocketCommand_m.o \
     $O/inet/networklayer/contract/ipv6/Ipv6Address_m.o \
     $O/inet/networklayer/contract/ipv6/Ipv6SocketCommand_m.o \
+    $O/inet/networklayer/contract/ndn/iData_m.o \
+    $O/inet/networklayer/contract/ndn/Interest_m.o \
+    $O/inet/networklayer/contract/ndn/ndnFields_m.o \
+    $O/inet/networklayer/contract/ndn/ndnSocketCommand_m.o \
     $O/inet/networklayer/diffserv/Dscp_m.o \
     $O/inet/networklayer/flooding/FloodingHeader_m.o \
     $O/inet/networklayer/icmpv6/Icmpv6Header_m.o \
@@ -1264,7 +1271,7 @@ OBJS = \
     $O/inet/networklayer/ipv6/Ipv6Header_m.o \
     $O/inet/networklayer/ldp/LdpPacket_m.o \
     $O/inet/networklayer/lipsin/LipsinHeader_m.o \
-    $O/inet/networklayer/lipsin/bloomFilter/BloomFilter_m.o \
+    $O/inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin_m.o \
     $O/inet/networklayer/lipsin/bloomFilter/BloomParameters_m.o \
     $O/inet/networklayer/mpls/MplsPacket_m.o \
     $O/inet/networklayer/nexthop/NextHopForwardingHeader_m.o \
@@ -1423,6 +1430,10 @@ MSGFILES = \
     inet/networklayer/contract/ipv4/Ipv4SocketCommand.msg \
     inet/networklayer/contract/ipv6/Ipv6Address.msg \
     inet/networklayer/contract/ipv6/Ipv6SocketCommand.msg \
+    inet/networklayer/contract/ndn/iData.msg \
+    inet/networklayer/contract/ndn/Interest.msg \
+    inet/networklayer/contract/ndn/ndnFields.msg \
+    inet/networklayer/contract/ndn/ndnSocketCommand.msg \
     inet/networklayer/diffserv/Dscp.msg \
     inet/networklayer/flooding/FloodingHeader.msg \
     inet/networklayer/icmpv6/Icmpv6Header.msg \
@@ -1438,7 +1449,7 @@ MSGFILES = \
     inet/networklayer/ipv6/Ipv6Header.msg \
     inet/networklayer/ldp/LdpPacket.msg \
     inet/networklayer/lipsin/LipsinHeader.msg \
-    inet/networklayer/lipsin/bloomFilter/BloomFilter.msg \
+    inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin.msg \
     inet/networklayer/lipsin/bloomFilter/BloomParameters.msg \
     inet/networklayer/mpls/MplsPacket.msg \
     inet/networklayer/nexthop/NextHopForwardingHeader.msg \

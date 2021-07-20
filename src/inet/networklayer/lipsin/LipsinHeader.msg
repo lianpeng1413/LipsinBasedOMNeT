@@ -16,14 +16,14 @@
 import inet.common.INETDefs;
 import inet.common.packet.chunk.Chunk;
 import inet.networklayer.contract.NetworkHeaderBase;
-import inet.networklayer.lipsin.bloomFilter.BloomFilter;
+import inet.networklayer.lipsin.bloomFilter.BloomFilterLipsin;
 import inet.networklayer.lipsin.bloomFilter.BloomParameters;
 
 
 cplusplus {{
 #include<cstdlib>
 #include "inet/common/ProtocolGroup.h"
-#include "inet/networklayer/lipsin/bloomFilter/BloomFilter.h"
+#include "inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin.h"
 }}
 
 namespace inet;
@@ -39,8 +39,8 @@ class LipsinHeader extends FieldsChunk
     bool init = false;
     uint64_t nonce;
     BloomParameters para;
-    BloomFilter* preRoute;
-    BloomFilter* hadRoute;
+    BloomFilterLipsin* preRoute;
+    BloomFilterLipsin* hadRoute;
 }
 
 cplusplus(LipsinHeader){{
@@ -50,8 +50,8 @@ cplusplus(LipsinHeader){{
 		        para.projected_element_count = 50;
                 para.false_positive_probability = 0.01 ;
                 para.compute_optimal_parameters();
-                preRoute = new BloomFilter(para);
-                hadRoute = new BloomFilter(para);
+                preRoute = new BloomFilterLipsin(para);
+                hadRoute = new BloomFilterLipsin(para);
                 nonce = rand();
 		}
 		virtual bool preRouteContains(int linkID);

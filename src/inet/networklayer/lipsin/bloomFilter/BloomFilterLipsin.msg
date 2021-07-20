@@ -14,11 +14,11 @@
 // 
 
 cplusplus{{
-    #include "inet/networklayer/lipsin/bloomFilter/BloomFilter.h"
+    #include "inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin.h"
 }}
 namespace inet;
 
-class BloomFilter
+class BloomFilterLipsin
 {
     @existingClass;
     @opaque;
