@@ -134,6 +134,10 @@ class INET_API Protocol
     static const Protocol shortcutPhy;
     static const Protocol unitDisk;
     static const Protocol wiseRoute;
+
+    //ndn specific protocol
+    static const Protocol NFD;  // interest forwarding module
+    static const Protocol nlsr;    //interest forward according to routing table
 };
 
 inline std::ostream& operator << (std::ostream& o, const Protocol& t) { o << t.str(); return o; }

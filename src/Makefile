@@ -25,8 +25,20 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
 OBJS = \
+    $O/inet/applications/Fap/Fap.o \
+    $O/inet/applications/Fap/hash/MurmurHash3.o \
+    $O/inet/applications/ICNapp/fileTransApp.o \
+    $O/inet/applications/ICNapp/fileTransProvider.o \
+    $O/inet/applications/ICNapp/ndnFlowProvider.o \
+    $O/inet/applications/ICNapp/ndnFlowTransApp.o \
     $O/inet/applications/base/ApplicationBase.o \
     $O/inet/applications/base/ApplicationPacketSerializer.o \
+    $O/inet/applications/compUdpApp/UdpFileProvider.o \
+    $O/inet/applications/compUdpApp/UdpFileTransApp.o \
+    $O/inet/applications/compUdpApp/UdpFlowProvider.o \
+    $O/inet/applications/compUdpApp/UdpFlowTransApp.o \
+    $O/inet/applications/compUdpApp/UdpRequest.o \
+    $O/inet/applications/compUdpApp/UdpResponse.o \
     $O/inet/applications/dhcp/DhcpClient.o \
     $O/inet/applications/dhcp/DhcpMessageSerializer.o \
     $O/inet/applications/dhcp/DhcpServer.o \
@@ -52,6 +64,8 @@ OBJS = \
     $O/inet/applications/httptools/server/HttpServerDirectEvilB.o \
     $O/inet/applications/httptools/server/HttpServerEvilA.o \
     $O/inet/applications/httptools/server/HttpServerEvilB.o \
+    $O/inet/applications/ndn/ndnSimpleApp.o \
+    $O/inet/applications/ndn/ndnSimpleProvider.o \
     $O/inet/applications/netperfmeter/NetPerfMeter.o \
     $O/inet/applications/packetdrill/lexer.o \
     $O/inet/applications/packetdrill/PacketDrill.o \
@@ -123,6 +137,7 @@ OBJS = \
     $O/inet/common/TlvOptions.o \
     $O/inet/common/Topology.o \
     $O/inet/common/XMLUtils.o \
+    $O/inet/common/bloomfilter/hash/MurmurHash3.o \
     $O/inet/common/checksum/EthernetCRC.o \
     $O/inet/common/checksum/TcpIpChecksum.o \
     $O/inet/common/figures/BarFigure.o \
@@ -555,6 +570,14 @@ OBJS = \
     $O/inet/networklayer/mpls/MplsPacket.o \
     $O/inet/networklayer/mpls/MplsPacketSerializer.o \
     $O/inet/networklayer/mpls/MplsProtocolDissector.o \
+    $O/inet/networklayer/ndn/CS/cacheTable.o \
+    $O/inet/networklayer/ndn/CS/contentBlock.o \
+    $O/inet/networklayer/ndn/CS/ndnChunk.o \
+    $O/inet/networklayer/ndn/FIB/fibBase.o \
+    $O/inet/networklayer/ndn/NFD/ndnFragBuf.o \
+    $O/inet/networklayer/ndn/NFD/NFD.o \
+    $O/inet/networklayer/ndn/PIT/pitBase.o \
+    $O/inet/networklayer/ndnFlood/ndnFlood/ndnFlood.o \
     $O/inet/networklayer/nexthop/NextHopForwarding.o \
     $O/inet/networklayer/nexthop/NextHopInterfaceData.o \
     $O/inet/networklayer/nexthop/NextHopProtocolDissector.o \
@@ -927,6 +950,41 @@ OBJS = \
     $O/inet/routing/dymo/DymoRouteData.o \
     $O/inet/routing/gpsr/Gpsr.o \
     $O/inet/routing/gpsr/PositionTable.o \
+    $O/inet/routing/nlsr/Nlsr.o \
+    $O/inet/routing/nlsr/NlsrConfigReader.o \
+    $O/inet/routing/nlsr/PSync/detail/bloomFilter.o \
+    $O/inet/routing/nlsr/PSync/detail/iblt.o \
+    $O/inet/routing/nlsr/PSync/detail/state.o \
+    $O/inet/routing/nlsr/PSync/detail/util.o \
+    $O/inet/routing/nlsr/base/common/NlsrPacketSerializerBase.o \
+    $O/inet/routing/nlsr/base/common/NlsrProtocolDissector.o \
+    $O/inet/routing/nlsr/interface/NlsrInterface.o \
+    $O/inet/routing/nlsr/interface/NlsrInterfaceState.o \
+    $O/inet/routing/nlsr/interface/NlsrInterfaceStateDown.o \
+    $O/inet/routing/nlsr/interface/NlsrInterfaceStatePointToPoint.o \
+    $O/inet/routing/nlsr/messageHandler/HelloHandler.o \
+    $O/inet/routing/nlsr/messageHandler/LSAHandler.o \
+    $O/inet/routing/nlsr/messageHandler/MessageHandler.o \
+    $O/inet/routing/nlsr/messageHandler/SyncHandler.o \
+    $O/inet/routing/nlsr/neighbor/adjacencyList.o \
+    $O/inet/routing/nlsr/neighbor/NlsrNeighbor.o \
+    $O/inet/routing/nlsr/neighbor/NlsrNeighborState.o \
+    $O/inet/routing/nlsr/neighbor/NlsrNeighborStateDown.o \
+    $O/inet/routing/nlsr/neighbor/NlsrNeighborStateExchange.o \
+    $O/inet/routing/nlsr/neighbor/NlsrNeighborStateFull.o \
+    $O/inet/routing/nlsr/router/namePrefixList.o \
+    $O/inet/routing/nlsr/router/NlsrArea.o \
+    $O/inet/routing/nlsr/router/NlsrRouter.o \
+    $O/inet/routing/nlsr/router/route/fib.o \
+    $O/inet/routing/nlsr/router/route/map.o \
+    $O/inet/routing/nlsr/router/route/namePrefixTable.o \
+    $O/inet/routing/nlsr/router/route/namePrefixTableEntry.o \
+    $O/inet/routing/nlsr/router/route/nextHop.o \
+    $O/inet/routing/nlsr/router/route/nextHopList.o \
+    $O/inet/routing/nlsr/router/route/routingTable.o \
+    $O/inet/routing/nlsr/router/route/routingTableCalculator.o \
+    $O/inet/routing/nlsr/router/route/routingTableEntry.o \
+    $O/inet/routing/nlsr/router/route/routingTablePoolEntry.o \
     $O/inet/routing/ospf_common/OspfPacketSerializer.o \
     $O/inet/routing/ospf_common/OspfProtocolDissector.o \
     $O/inet/routing/ospfv2/Ospfv2.o \
@@ -1170,12 +1228,19 @@ OBJS = \
     $O/inet/visualizer/util/Placement.o \
     $O/inet/visualizer/util/PortFilter.o \
     $O/inet/visualizer/util/QueueFilter.o \
+    $O/inet/applications/Fap/FAPmessage_m.o \
+    $O/inet/applications/ICNapp/ndnFileHead_m.o \
     $O/inet/applications/base/ApplicationPacket_m.o \
     $O/inet/applications/common/SocketTag_m.o \
+    $O/inet/applications/compUdpApp/fileHead_m.o \
+    $O/inet/applications/compUdpApp/flowHead_m.o \
+    $O/inet/applications/compUdpApp/flowReuqest_m.o \
+    $O/inet/applications/compUdpApp/reuqest_m.o \
     $O/inet/applications/dhcp/DhcpMessage_m.o \
     $O/inet/applications/ethernet/EtherApp_m.o \
     $O/inet/applications/httptools/common/HttpEventMessages_m.o \
     $O/inet/applications/httptools/common/HttpMessages_m.o \
+    $O/inet/applications/ndn/reuqest_m.o \
     $O/inet/applications/netperfmeter/NetPerfMeter_m.o \
     $O/inet/applications/packetdrill/PacketDrillInfo_m.o \
     $O/inet/applications/pingapp/PingApp_m.o \
@@ -1274,6 +1339,9 @@ OBJS = \
     $O/inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin_m.o \
     $O/inet/networklayer/lipsin/bloomFilter/BloomParameters_m.o \
     $O/inet/networklayer/mpls/MplsPacket_m.o \
+    $O/inet/networklayer/ndn/FIB/iFib_m.o \
+    $O/inet/networklayer/ndn/NFD/ndnAppData_m.o \
+    $O/inet/networklayer/ndn/PIT/pitEntry_m.o \
     $O/inet/networklayer/nexthop/NextHopForwardingHeader_m.o \
     $O/inet/networklayer/probabilistic/ProbabilisticBroadcastHeader_m.o \
     $O/inet/networklayer/rsvpte/IntServ_m.o \
@@ -1319,6 +1387,9 @@ OBJS = \
     $O/inet/routing/dsdv/DsdvHello_m.o \
     $O/inet/routing/dymo/Dymo_m.o \
     $O/inet/routing/gpsr/Gpsr_m.o \
+    $O/inet/routing/nlsr/NlsrPacket_m.o \
+    $O/inet/routing/nlsr/base/common/NlsrPacketBase_m.o \
+    $O/inet/routing/nlsr/router/route/fibEntry_m.o \
     $O/inet/routing/ospf_common/OspfPacketBase_m.o \
     $O/inet/routing/ospfv2/Ospfv2Packet_m.o \
     $O/inet/routing/ospfv3/Ospfv3Packet_m.o \
@@ -1348,12 +1419,19 @@ OBJS = \
 
 # Message files
 MSGFILES = \
+    inet/applications/Fap/FAPmessage.msg \
+    inet/applications/ICNapp/ndnFileHead.msg \
     inet/applications/base/ApplicationPacket.msg \
     inet/applications/common/SocketTag.msg \
+    inet/applications/compUdpApp/fileHead.msg \
+    inet/applications/compUdpApp/flowHead.msg \
+    inet/applications/compUdpApp/flowReuqest.msg \
+    inet/applications/compUdpApp/reuqest.msg \
     inet/applications/dhcp/DhcpMessage.msg \
     inet/applications/ethernet/EtherApp.msg \
     inet/applications/httptools/common/HttpEventMessages.msg \
     inet/applications/httptools/common/HttpMessages.msg \
+    inet/applications/ndn/reuqest.msg \
     inet/applications/netperfmeter/NetPerfMeter.msg \
     inet/applications/packetdrill/PacketDrillInfo.msg \
     inet/applications/pingapp/PingApp.msg \
@@ -1452,6 +1530,9 @@ MSGFILES = \
     inet/networklayer/lipsin/bloomFilter/BloomFilterLipsin.msg \
     inet/networklayer/lipsin/bloomFilter/BloomParameters.msg \
     inet/networklayer/mpls/MplsPacket.msg \
+    inet/networklayer/ndn/FIB/iFib.msg \
+    inet/networklayer/ndn/NFD/ndnAppData.msg \
+    inet/networklayer/ndn/PIT/pitEntry.msg \
     inet/networklayer/nexthop/NextHopForwardingHeader.msg \
     inet/networklayer/probabilistic/ProbabilisticBroadcastHeader.msg \
     inet/networklayer/rsvpte/IntServ.msg \
@@ -1497,6 +1578,9 @@ MSGFILES = \
     inet/routing/dsdv/DsdvHello.msg \
     inet/routing/dymo/Dymo.msg \
     inet/routing/gpsr/Gpsr.msg \
+    inet/routing/nlsr/NlsrPacket.msg \
+    inet/routing/nlsr/base/common/NlsrPacketBase.msg \
+    inet/routing/nlsr/router/route/fibEntry.msg \
     inet/routing/ospf_common/OspfPacketBase.msg \
     inet/routing/ospfv2/Ospfv2Packet.msg \
     inet/routing/ospfv3/Ospfv3Packet.msg \

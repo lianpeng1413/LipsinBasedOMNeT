@@ -85,6 +85,9 @@ ProtocolGroup ProtocolGroup::ethertype("ethertype", {
     { 0x8847, &Protocol::mpls },
     { 0x88CC, &Protocol::lldp },
     { 0x891d, &Protocol::tteth },
+    //ndn simulation protocol tags
+    { 0x892d, &Protocol::NFD },
+    { 0x893d, &Protocol::nlsr},
 });
 
 // excerpt from http://www.iana.org/assignments/ppp-numbers/ppp-numbers.xhtml#ppp-numbers-2

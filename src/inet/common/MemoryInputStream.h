@@ -20,6 +20,7 @@
 #include "inet/linklayer/common/MacAddress.h"
 #include "inet/networklayer/contract/ipv4/Ipv4Address.h"
 #include "inet/networklayer/contract/ipv6/Ipv6Address.h"
+#include "inet/networklayer/contract/ndn/iName.h"
 
 namespace inet {
 
@@ -410,10 +411,23 @@ class INET_API MemoryInputStream {
     }
 
     /**
+     * Reads an interest name at the current position of the stream in big endian
+     * byte order and MSB to LSB bit order.
+     */
+    iName readNdnName() {
+        iName name;
+        std::vector<uint8_t> data;
+        while (uint8_t b = readByte())
+            data.push_back(b);
+        name.set(std::string(data.begin(), data.end()));
+        return name;
+    }
+
+    /**
      * Reads an Ipv4 address at the current position of the stream in big endian
      * byte order and MSB to LSB bit order.
      */
-    Ipv4Address readIpv4Address() {
+    Ipv4Address readIpv4Address() {  //TODO maybe has issues
         return Ipv4Address(readUint32Be());
     }
 

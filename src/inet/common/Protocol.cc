@@ -149,5 +149,8 @@ const Protocol Protocol::shortcutPhy("shortcutphy", "Shortcut PHY", Protocol::Ph
 const Protocol Protocol::unitDisk("unitdisk", "UnitDisk");
 const Protocol Protocol::wiseRoute("wiseroute", "WiseRoute"); // WiseRoute Network Protocol
 
+// ndn protocol
+const Protocol Protocol::NFD("NFD", "NFD", Protocol::NetworkLayer);
+const Protocol Protocol::nlsr("nlsr","nlsr",Protocol::NetworkLayer);
 } // namespace inet
 

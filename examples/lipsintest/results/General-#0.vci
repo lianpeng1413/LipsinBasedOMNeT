@@ -1,4 +1,4 @@
-file 785 1615553068                                             
+file 785 1626764879                                             
 version 2
 run General-0-20210312-20:44:18-98967
 attr configname General
@@ -22,10 +22,9 @@ vector 0 SimpleTest.R2.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
+0	768 8 0 0 0 0 1 0 0 0 0
 vector 1 SimpleTest.R4.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr source transmissionStateChanged
 attr title "tx state, vector"
-0	768 8 0 0 0 0 1 0 0 0 0
-1	776 8 0 0 0 0 1 0 0 0 0
-
+1	776 9 0 0 0 0 1 0 0 0 0

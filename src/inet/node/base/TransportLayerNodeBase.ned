@@ -66,9 +66,6 @@ module TransportLayerNodeBase extends NetworkLayerNodeBase
 
         tn.out++ --> generic.transportIn if hasGn;
         tn.in++ <-- generic.transportOut if hasGn;
-        
-        tn.out++ --> lipsinbase.transportIn if hasLipsin;
-        tn.in++ <-- lipsinbase.transportOut if hasLipsin;
 
         tn.out++ --> nl.in++;
         tn.in++ <-- nl.out++;

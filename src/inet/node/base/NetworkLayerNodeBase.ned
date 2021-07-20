@@ -59,13 +59,10 @@ module NetworkLayerNodeBase extends LinkLayerNodeBase
     connections allowunconnected:
         ipv4.ifIn <-- nl.out++ if hasIpv4;
         ipv4.ifOut --> nl.in++ if hasIpv4;
-        
+
         ipv6.ifIn <-- nl.out++ if hasIpv6;
         ipv6.ifOut --> nl.in++ if hasIpv6;
 
-		lipsinbase.ifIn <-- nl.out++ if hasLipsin;
-		lipsinbase.ifOut --> nl.in++ if hasLipsin;
-		
         generic.ifIn <-- nl.out++ if exists(generic);
         generic.ifOut --> nl.in++ if exists(generic);
 

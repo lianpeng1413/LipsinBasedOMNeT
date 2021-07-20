@@ -59,7 +59,7 @@ module LinkLayerNodeBase extends NodeBase
         }
         lo[numLoInterfaces]: <default("LoopbackInterface")> like ILoopbackInterface {
             parameters:
-                @display("p=750,526,row,150");
+                @display("p=711.89996,524.475,row,150");
         }
         // TODO: move wlan interfaces after eth interfaces, but it changes IP address assignment and breaks examples/inet/configurator/complex.ini
         wlan[numWlanInterfaces]: <default("Ieee80211Interface")> like IWirelessInterface {
@@ -72,15 +72,15 @@ module LinkLayerNodeBase extends NodeBase
         }
         eth[sizeof(ethg)]: <default("EthernetInterface")> like IEthernetInterface {
             parameters:
-                @display("p=900,526,row,150;q=txQueue");
+                @display("p=908.77496,524.475,row,150;q=txQueue");
         }
         tun[numTunInterfaces]: <default("TunInterface")> like ITunnelInterface {
             parameters:
-                @display("p=975,616,row,150;q=txQueue");
+                @display("p=987.52496,614.25,row,150;q=txQueue");
         }
         vlan[numVlanInterfaces]: <default("VlanInterface")> like IVlanInterface {
             parameters:
-                @display("p=975,616,row,150;q=txQueue");
+                @display("p=711.89996,615.82495,row,150;q=txQueue");
         }
 
     connections allowunconnected:
