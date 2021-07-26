@@ -36,7 +36,7 @@ protected:
     int localPort = -1;
     cPar *sendInterval = nullptr;
     cPar *packetLen = nullptr;
-
+    std::string packetName = "";
     // statistics
     unsigned long numPkSent = 0;    // total number of packets sent
     static simsignal_t reqStreamBytesSignal;    // length of streams served

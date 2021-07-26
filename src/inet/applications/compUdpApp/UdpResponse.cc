@@ -31,6 +31,7 @@ void UdpResponse::initialize(int stage)
         rngNum = cSimulation::getActiveSimulation()->getSystemModule()->par("rngNum").intValue();
         packetLen = &par("packetLen");
         localPort = par("localPort");
+        packetName = par("packetName").stdstringValue();
 
         // statistics
         numPkSent = 0;
@@ -74,7 +75,7 @@ void UdpResponse::processStreamRequest(Packet *msg)
     auto reqHead = msg->peekAtFront<Req>();
 
     // generate and send a packet
-    Packet *pkt = new Packet("PacketStrmPk");
+    Packet *pkt = new Packet(std::string(packetName+"_"+std::to_string((int)reqHead->getSeq())).c_str());
     long pktLen = *packetLen;
 
     pkt->setTimestamp(simTime());

@@ -32,6 +32,7 @@ simple UdpRequest like IApp
         int serverPort;  // server port
         double startTime @unit(s) = default(1s);
         string RSpath = default("./");
+        string packetName = default("udpReq");
         int helloInterval @unit(s) = default(10s);
         @display("i=block/app");
         @lifecycleSupport;

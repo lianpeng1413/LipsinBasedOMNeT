@@ -92,6 +92,7 @@ class INET_API UdpRequest : public ApplicationBase, public UdpSocket::ICallback
     int seqNum = 0;
     double pktNum;
     std::string path;
+    std::string packetName = "";
     UdpRequest() { }
     ~UdpRequest();
     int getHelloInterval(){ return helloInterval;}

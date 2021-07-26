@@ -68,6 +68,7 @@ void UdpRequest::initialize(int stage)
         sendInterval = cSimulation::getActiveSimulation()->getSystemModule()->par("sendInterval").doubleValue();
         helloInterval = par("helloInterval").intValue();
         path = par("RSpath").stdstringValue();
+        packetName = par("packetName").stdstringValue();
     }
 }
 
@@ -124,7 +125,7 @@ void UdpRequest::sendReq()
     int svrPort = par("serverPort");
     const char *address = par("serverAddress");
     L3Address svrAddr = L3AddressResolver().resolve(address);
-    Packet *pk = new Packet("VideoStrmReq");
+    Packet *pk = new Packet(std::string(packetName+"_"+std::to_string(seqNum)).c_str());
 
     const auto& head = makeShared<Req>();
     head->setSeq(seqNum);
